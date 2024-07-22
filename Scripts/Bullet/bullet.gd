@@ -17,7 +17,10 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
+	print("as")
+	print(body.name)
 	if "Enemy" in body.name:
+		print("test")
 		parent_body = body
 		body.get_node("TakeDamageHandler").hit(damage)
 		queue_free()

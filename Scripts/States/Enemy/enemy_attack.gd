@@ -27,9 +27,9 @@ func _on_animation_finished(_anim_name):
 			player.get_node("TakeDamageHandler").hit(damage)
 			attack_sequence()
 	
-	# If not, return to pursuing
-	else:
-		Transitioned.emit(self, "EnemyPursue")
+		# If not, return to pursuing
+		else:
+			Transitioned.emit(self, "EnemyPursue")
 
 func attack_sequence():
 	animation_player.play("Attack")

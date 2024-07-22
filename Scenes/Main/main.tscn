@@ -1,11 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://0sv11oa06rv"]
 
+[ext_resource type="Script" path="res://Scripts/Main/main.gd" id="1_3j5qx"]
 [ext_resource type="PackedScene" uid="uid://ond57oqk3mow" path="res://Scenes/Main/main_camera.tscn" id="1_caga4"]
 [ext_resource type="PackedScene" uid="uid://drav6jqmqj3v6" path="res://Scenes/Player/player.tscn" id="1_qsjv3"]
 [ext_resource type="PackedScene" uid="uid://bow61vbksbqlh" path="res://Scenes/Main/game_tiles.tscn" id="3_r8el6"]
-[ext_resource type="PackedScene" uid="uid://bteinqbxyigkb" path="res://Scenes/base_enemy.tscn" id="4_d3vyj"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_3j5qx")
 
 [node name="MainCamera" parent="." instance=ExtResource("1_caga4")]
 unique_name_in_owner = true
@@ -18,8 +19,8 @@ layer_0/tile_data = PackedInt32Array(655342, 0, 0, 655343, 0, 0, 655344, 0, 0, 6
 [node name="Player" parent="." instance=ExtResource("1_qsjv3")]
 position = Vector2(0, -1)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("4_d3vyj")]
-position = Vector2(-261, -132)
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
-[node name="BaseEnemy2" parent="." instance=ExtResource("4_d3vyj")]
-position = Vector2(-159, -102)
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

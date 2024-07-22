@@ -64,7 +64,7 @@ func rotate_gun_and_player(flip : bool):
 
 # Shooting mechanic and spawning bullet
 func shoot():
-	get_tree().current_scene.get_node("MainCamera").apply_shake(1, 4)
+	get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
 	animation_player.play("shoot")
 	spawn_bullet()
 

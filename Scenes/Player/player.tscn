@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_6spgu"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_tx7up"]
-[ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/wand.tscn" id="4_fftte"]
+[ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/Wand/wand.tscn" id="4_fftte"]
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="4_t324w"]
 [ext_resource type="Script" path="res://Scripts/Player/player_collision_handler.gd" id="5_fkuyb"]
 
