@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://drav6jqmqj3v6"]
+[gd_scene load_steps=9 format=3 uid="uid://drav6jqmqj3v6"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3uk8g"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_tx7up"]
 [ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/wand.tscn" id="4_fftte"]
+[ext_resource type="Script" path="res://Scripts/take_damage_handler.gd" id="4_iiicm"]
 
 [sub_resource type="Animation" id="Animation_j748q"]
 resource_name = "Idle"
@@ -20,6 +21,7 @@ _data = {
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 17
 motion_mode = 1
 script = ExtResource("1_3uk8g")
 speed = 200.0
@@ -40,3 +42,7 @@ shape = SubResource("RectangleShape2D_3eu7w")
 
 [node name="Wand" parent="." instance=ExtResource("4_fftte")]
 scale = Vector2(0.203125, 0.203125)
+
+[node name="TakeDamageHandler" type="Node" parent="."]
+script = ExtResource("4_iiicm")
+health = 200

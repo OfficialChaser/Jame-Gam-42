@@ -12,7 +12,7 @@ var rng = RandomNumberGenerator.new()
 
 var shake_strength := 0.0
 
-func _input(event):
+func _input(_event):
 	pass
 	#if event is InputEventMouseMotion:
 		#var target = event.position * 0.25

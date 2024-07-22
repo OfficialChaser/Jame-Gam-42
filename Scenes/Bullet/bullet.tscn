@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://n8d0h101vc0i"]
 
-[ext_resource type="Script" path="res://Scripts/Bullet/bullet.gd" id="1_pgiec"]
-[ext_resource type="Texture2D" uid="uid://43rwjkvxm6rb" path="res://Assets/Player/Attacking/Bullet.png" id="2_cge2x"]
-[ext_resource type="PackedScene" uid="uid://w4i4xitbsx2r" path="res://Scenes/bullet_trail.tscn" id="2_iknmr"]
+[ext_resource type="Script" path="res://Scripts/Bullet/bullet.gd" id="1_r1kqj"]
+[ext_resource type="PackedScene" uid="uid://w4i4xitbsx2r" path="res://Scenes/Bullet/bullet_trail.tscn" id="2_iu3pr"]
+[ext_resource type="Texture2D" uid="uid://43rwjkvxm6rb" path="res://Bullet.png" id="3_3dl4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dulc0"]
 size = Vector2(6, 6)
@@ -48,7 +48,7 @@ _data = {
 [node name="Bullet" type="Area2D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_pgiec")
+script = ExtResource("1_r1kqj")
 speed = 500.0
 damage = 20
 
@@ -59,14 +59,14 @@ scale = Vector2(0.4, 0.4)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dulc0")
 
-[node name="BulletTrail" parent="." instance=ExtResource("2_iknmr")]
+[node name="BulletTrail" parent="." instance=ExtResource("2_iu3pr")]
 
 [node name="SpriteContainer" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
 z_index = 1
 scale = Vector2(0.375, 0.375)
-texture = ExtResource("2_cge2x")
+texture = ExtResource("3_3dl4n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteContainer/Sprite2D"]
 libraries = {

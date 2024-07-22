@@ -1,8 +1,9 @@
 extends Node2D
+class_name Wand
 
-var bullet := preload("res://Scenes/bullet.tscn")
+var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 
-@onready var gun_sprite = $SpriteHolder/GunSprite
+@onready var gun_sprite = $SpriteHolder/WandSprite
 @onready var hands_sprite = $SpriteHolder/HandsSprite
 @onready var bullet_marker = $BulletMarker
 @onready var animation_player = $AnimationPlayer
@@ -16,9 +17,10 @@ func _process(_delta):
 
 # Handling shooting input
 func _input(event):
-	if event.is_action_pressed("left_click") and !animation_player.is_playing():
-		shoot()
+	if event.is_action_pressed("left_click"):
 		holding_shoot = true
+		if !animation_player.is_playing():
+			shoot()
 	if event.is_action_released("left_click"):
 		holding_shoot = false
 
@@ -43,7 +45,7 @@ func rotate_gun_and_player(flip : bool):
 
 # Shooting mechanic and spawning bullet
 func shoot():
-	get_tree().current_scene.get_node("MainCamera").apply_shake(1, 2)
+	get_tree().current_scene.get_node("MainCamera").apply_shake(1, 4)
 	animation_player.play("shoot")
 	spawn_bullet()
 

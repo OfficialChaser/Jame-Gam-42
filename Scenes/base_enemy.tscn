@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://bteinqbxyigkb"]
+
+[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_j6uan"]
+[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="1_p4h2m"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="2_7mgai"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_pursue.gd" id="3_2vbdw"]
+[ext_resource type="Script" path="res://Scripts/take_damage_handler.gd" id="5_1g3et"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_attack.gd" id="5_w7qti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anvki"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_m4vqv"]
+resource_name = "Pursue"
+
+[sub_resource type="Animation" id="Animation_ntec6"]
+resource_name = "Spawn"
+
+[sub_resource type="Animation" id="Animation_8p1qn"]
+resource_name = "Attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4xiu"]
+_data = {
+"Attack": SubResource("Animation_8p1qn"),
+"Pursue": SubResource("Animation_m4vqv"),
+"Spawn": SubResource("Animation_ntec6")
+}
+
+[node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
+modulate = Color(1, 0.0352941, 0, 1)
+script = ExtResource("1_j6uan")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_p4h2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_anvki")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_7mgai")
+initial_state = NodePath("EnemyPursue")
+
+[node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite")]
+script = ExtResource("3_2vbdw")
+speed = 1.0
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+
+[node name="EnemyAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("5_w7qti")
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+damage = 20
+attack_range = 25.0
+
+[node name="TakeDamageHandler" type="Node" parent="."]
+script = ExtResource("5_1g3et")
+health = 100
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j4xiu")
+}
+autoplay = "Spawn"

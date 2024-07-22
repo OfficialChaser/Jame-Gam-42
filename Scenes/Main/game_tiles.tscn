@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bow61vbksbqlh"]
+
+[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="1_jt6dl"]
+[ext_resource type="Script" path="res://Scripts/game_tiles.gd" id="2_pwm7x"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_afgo6"]
+texture = ExtResource("1_jt6dl")
+0:0/next_alternative_id = 3
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
+0:0/1 = 1
+0:0/1/modulate = Color(0.71445, 0.710552, 0.759438, 1)
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_1/angular_velocity = 0.0
+0:0/1/custom_data_0 = true
+0:0/2 = 2
+0:0/2/modulate = Color(0, 0, 0, 1)
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/2/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_1/angular_velocity = 0.0
+0:0/2/physics_layer_1/polygon_0/points = PackedVector2Array(-4.625, -3.875, 4.125, -3.875, 4, 3.875, -4.75, 3.75)
+
+[sub_resource type="TileSet" id="TileSet_tf5fv"]
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 16
+physics_layer_1/collision_mask = 16
+custom_data_layer_0/name = "walkable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_afgo6")
+
+[node name="GameTiles" type="TileMap"]
+tile_set = SubResource("TileSet_tf5fv")
+format = 2
+script = ExtResource("2_pwm7x")
+
+[node name="TileDecayTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TileDecayTimer" to="." method="_on_tile_decay_timer_timeout"]

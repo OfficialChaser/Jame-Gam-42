@@ -71,7 +71,7 @@ script = ExtResource("1_v1q6k")
 [node name="SpriteHolder" type="Node2D" parent="."]
 position = Vector2(20, 0)
 
-[node name="GunSprite" type="Sprite2D" parent="SpriteHolder"]
+[node name="WandSprite" type="Sprite2D" parent="SpriteHolder"]
 position = Vector2(42, 9.53674e-07)
 scale = Vector2(6, 2.1875)
 texture = ExtResource("2_t26ox")

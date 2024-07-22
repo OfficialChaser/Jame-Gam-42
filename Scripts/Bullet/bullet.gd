@@ -3,8 +3,6 @@ extends Area2D
 var parent_body : CharacterBody2D
 
 var damage_effect
-
-var queue_pushback := false
 @export var speed : float
 @export var damage : int
 
@@ -15,15 +13,15 @@ func _ready():
 func _physics_process(delta):
 	movement = (Vector2.RIGHT * speed).rotated(rotation)
 	position += movement * delta
-	if queue_pushback:
-		spawn_damage_effect(parent_body)
+	
 
 
 func _on_body_entered(body):
 	if "Enemy" in body.name:
 		parent_body = body
-		body.hit(movement, rotation, damage)
-		queue_pushback = true
+		body.get_node("TakeDamageHandler").hit(damage)
+		queue_free()
+		#spawn_damage_effect(parent_body)
 	else:
 		queue_free()
 

@@ -13,6 +13,7 @@ var past_global_pos : Vector2
 var stationary : bool
 
 func _physics_process(_delta):
+	#print($TakeDamageHandler.health)
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = lerp(velocity, direction * speed, 0.1)
 	
