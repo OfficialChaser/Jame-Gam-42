@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://drav6jqmqj3v6"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_3uk8g"]
+[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_tx7up"]
+[ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/wand.tscn" id="4_fftte"]
+
+[sub_resource type="Animation" id="Animation_j748q"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_kel6y"]
+resource_name = "Run"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6vuu"]
+_data = {
+"Idle": SubResource("Animation_j748q"),
+"Run": SubResource("Animation_kel6y")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3eu7w"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_3uk8g")
+speed = 200.0
+acc = 50.0
+dec = 60.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tx7up")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_g6vuu")
+}
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3eu7w")
+
+[node name="Wand" parent="." instance=ExtResource("4_fftte")]
+scale = Vector2(0.203125, 0.203125)

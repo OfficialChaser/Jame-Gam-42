@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq6eftrbnag1o"]
+
+[ext_resource type="Script" path="res://Scripts/wand.gd" id="1_v1q6k"]
+[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_t26ox"]
+
+[sub_resource type="Animation" id="Animation_km4jw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2427t"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 0), Vector2(10, 0), Vector2(20, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_irsre"]
+_data = {
+"RESET": SubResource("Animation_km4jw"),
+"shoot": SubResource("Animation_2427t")
+}
+
+[node name="Wand" type="Node2D"]
+z_index = 6
+script = ExtResource("1_v1q6k")
+
+[node name="SpriteHolder" type="Node2D" parent="."]
+position = Vector2(20, 0)
+
+[node name="GunSprite" type="Sprite2D" parent="SpriteHolder"]
+position = Vector2(42, 9.53674e-07)
+scale = Vector2(6, 2.1875)
+texture = ExtResource("2_t26ox")
+
+[node name="HandsSprite" type="Sprite2D" parent="SpriteHolder"]
+position = Vector2(25, 0)
+scale = Vector2(4, 4)
+
+[node name="BulletMarker" type="Marker2D" parent="."]
+position = Vector2(48, -6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_irsre")
+}

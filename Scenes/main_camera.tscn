@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ond57oqk3mow"]
+
+[ext_resource type="Script" path="res://Scripts/main_camera.gd" id="1_wcpog"]
+
+[node name="MainCamera" type="Camera2D"]
+process_callback = 0
+script = ExtResource("1_wcpog")
+offset_factor = 0.02

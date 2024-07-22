@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://w4i4xitbsx2r"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet/bullet_trail.gd" id="1_j31di"]
+
+[sub_resource type="Curve" id="Curve_d0l2r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.442105, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lic5p"]
+colors = PackedColorArray(0.996669, 0.99232, 0.805048, 1, 0.992157, 0.976471, 0.596078, 1)
+
+[node name="BulletTrail" type="Line2D"]
+closed = true
+width = 5.0
+width_curve = SubResource("Curve_d0l2r")
+default_color = Color(0.992157, 0.976471, 0.596078, 1)
+gradient = SubResource("Gradient_lic5p")
+script = ExtResource("1_j31di")
+length = 10

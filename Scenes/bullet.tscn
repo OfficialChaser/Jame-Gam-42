@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://n8d0h101vc0i"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet/bullet.gd" id="1_pgiec"]
+[ext_resource type="Texture2D" uid="uid://43rwjkvxm6rb" path="res://Assets/Player/Attacking/Bullet.png" id="2_cge2x"]
+[ext_resource type="PackedScene" uid="uid://w4i4xitbsx2r" path="res://Scenes/bullet_trail.tscn" id="2_iknmr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dulc0"]
+size = Vector2(6, 6)
+
+[sub_resource type="Animation" id="Animation_nw4gq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7b3ye"]
+resource_name = "SquashAndStretch"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2.25, 2.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vtd4"]
+_data = {
+"RESET": SubResource("Animation_nw4gq"),
+"SquashAndStretch": SubResource("Animation_7b3ye")
+}
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_pgiec")
+speed = 500.0
+damage = 20
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dulc0")
+
+[node name="BulletTrail" parent="." instance=ExtResource("2_iknmr")]
+
+[node name="SpriteContainer" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
+z_index = 1
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_cge2x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteContainer/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_3vtd4")
+}
+autoplay = "SquashAndStretch"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
