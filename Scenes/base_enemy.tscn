@@ -1,23 +1,23 @@
 [gd_scene load_steps=12 format=3 uid="uid://bteinqbxyigkb"]
 
-[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_j6uan"]
+[ext_resource type="Script" path="res://Scripts/Enemies/base_enemy.gd" id="1_jmtwd"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="1_p4h2m"]
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="2_7mgai"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_pursue.gd" id="3_2vbdw"]
-[ext_resource type="Script" path="res://Scripts/take_damage_handler.gd" id="5_1g3et"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_attack.gd" id="5_w7qti"]
+[ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="6_hb22m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anvki"]
 size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_8p1qn"]
+resource_name = "Attack"
 
 [sub_resource type="Animation" id="Animation_m4vqv"]
 resource_name = "Pursue"
 
 [sub_resource type="Animation" id="Animation_ntec6"]
 resource_name = "Spawn"
-
-[sub_resource type="Animation" id="Animation_8p1qn"]
-resource_name = "Attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j4xiu"]
 _data = {
@@ -28,7 +28,7 @@ _data = {
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 modulate = Color(1, 0.0352941, 0, 1)
-script = ExtResource("1_j6uan")
+script = ExtResource("1_jmtwd")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_p4h2m")
@@ -55,7 +55,7 @@ damage = 20
 attack_range = 25.0
 
 [node name="TakeDamageHandler" type="Node" parent="."]
-script = ExtResource("5_1g3et")
+script = ExtResource("6_hb22m")
 health = 100
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

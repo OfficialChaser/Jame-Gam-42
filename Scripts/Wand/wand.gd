@@ -1,28 +1,47 @@
 extends Node2D
 class_name Wand
 
+enum WandStates {GUN, RESTORE}
+
+var wand_state := 0
+
 var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 
 @onready var gun_sprite = $SpriteHolder/WandSprite
 @onready var hands_sprite = $SpriteHolder/HandsSprite
 @onready var bullet_marker = $BulletMarker
 @onready var animation_player = $AnimationPlayer
+@onready var grid_highlight = $GridHighlight
 
 var holding_shoot := false
 
 func _process(_delta):
 	look_at(get_global_mouse_position())
-	_check_rotation()
-	_check_autofire()
+	match wand_state:
+		WandStates.GUN:
+			grid_highlight.visible = false
+			_check_rotation()
+			_check_autofire()
+		WandStates.RESTORE:
+			grid_highlight.visible = true
 
 # Handling shooting input
 func _input(event):
-	if event.is_action_pressed("left_click"):
-		holding_shoot = true
-		if !animation_player.is_playing():
-			shoot()
-	if event.is_action_released("left_click"):
-		holding_shoot = false
+	if event.is_action_pressed("right_click"):
+		wand_state += 1
+		if wand_state > 1:
+			wand_state = 0
+	match wand_state:
+		WandStates.GUN:
+			if event.is_action_pressed("left_click"):
+				holding_shoot = true
+				if !animation_player.is_playing():
+					shoot()
+			if event.is_action_released("left_click"):
+				holding_shoot = false
+		WandStates.RESTORE:
+			if event.is_action("left_click"):
+				get_tree().current_scene.get_node("GameTiles").restore_tiles(get_global_mouse_position())
 
 # Rotation of gun and hands function 
 func _check_rotation():

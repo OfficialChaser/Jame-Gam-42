@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmk7nu4tph1id"]
+
+[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="1_ibgql"]
+[ext_resource type="Script" path="res://Scripts/grid_highlight.gd" id="2_y8j81"]
+
+[node name="GridHighlight" type="Sprite2D"]
+modulate = Color(0.662745, 1, 0.415686, 0.329412)
+scale = Vector2(3, 3)
+texture = ExtResource("1_ibgql")
+script = ExtResource("2_y8j81")

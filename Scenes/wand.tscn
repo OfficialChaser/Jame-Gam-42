@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq6eftrbnag1o"]
+[gd_scene load_steps=7 format=3 uid="uid://dq6eftrbnag1o"]
 
-[ext_resource type="Script" path="res://Scripts/wand.gd" id="1_v1q6k"]
+[ext_resource type="Script" path="res://Scripts/Wand/wand.gd" id="1_dft4f"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_t26ox"]
+[ext_resource type="PackedScene" uid="uid://cmk7nu4tph1id" path="res://Scenes/grid_highlight.tscn" id="3_35krf"]
 
 [sub_resource type="Animation" id="Animation_km4jw"]
 length = 0.001
@@ -66,7 +67,7 @@ _data = {
 
 [node name="Wand" type="Node2D"]
 z_index = 6
-script = ExtResource("1_v1q6k")
+script = ExtResource("1_dft4f")
 
 [node name="SpriteHolder" type="Node2D" parent="."]
 position = Vector2(20, 0)
@@ -87,3 +88,5 @@ position = Vector2(48, -6)
 libraries = {
 "": SubResource("AnimationLibrary_irsre")
 }
+
+[node name="GridHighlight" parent="." instance=ExtResource("3_35krf")]

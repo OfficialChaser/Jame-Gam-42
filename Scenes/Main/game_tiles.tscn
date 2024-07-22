@@ -26,6 +26,7 @@ texture = ExtResource("1_jt6dl")
 0:0/2/physics_layer_1/linear_velocity = Vector2(0, 0)
 0:0/2/physics_layer_1/angular_velocity = 0.0
 0:0/2/physics_layer_1/polygon_0/points = PackedVector2Array(-4.625, -3.875, 4.125, -3.875, 4, 3.875, -4.75, 3.75)
+0:0/2/custom_data_1 = true
 
 [sub_resource type="TileSet" id="TileSet_tf5fv"]
 physics_layer_0/collision_layer = 1
@@ -33,6 +34,8 @@ physics_layer_1/collision_layer = 16
 physics_layer_1/collision_mask = 16
 custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "pit"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_afgo6")
 
 [node name="GameTiles" type="TileMap"]

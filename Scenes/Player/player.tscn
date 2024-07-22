@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://drav6jqmqj3v6"]
+[gd_scene load_steps=11 format=3 uid="uid://drav6jqmqj3v6"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_3uk8g"]
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_6spgu"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_tx7up"]
 [ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/wand.tscn" id="4_fftte"]
-[ext_resource type="Script" path="res://Scripts/take_damage_handler.gd" id="4_iiicm"]
+[ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="4_t324w"]
+[ext_resource type="Script" path="res://Scripts/Player/player_collision_handler.gd" id="5_fkuyb"]
 
 [sub_resource type="Animation" id="Animation_j748q"]
 resource_name = "Idle"
@@ -20,10 +21,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3eu7w"]
 size = Vector2(16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye5aj"]
+size = Vector2(18, 18)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
 motion_mode = 1
-script = ExtResource("1_3uk8g")
+script = ExtResource("1_6spgu")
 speed = 200.0
 acc = 50.0
 dec = 60.0
@@ -44,5 +48,14 @@ shape = SubResource("RectangleShape2D_3eu7w")
 scale = Vector2(0.203125, 0.203125)
 
 [node name="TakeDamageHandler" type="Node" parent="."]
-script = ExtResource("4_iiicm")
+script = ExtResource("4_t324w")
 health = 200
+
+[node name="PlayerCollisionHandler" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("5_fkuyb")
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionHandler"]
+shape = SubResource("RectangleShape2D_ye5aj")
