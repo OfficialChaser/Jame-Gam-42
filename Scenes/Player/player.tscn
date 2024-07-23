@@ -25,6 +25,7 @@ size = Vector2(12, 12)
 size = Vector2(14, 14)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 5
 collision_layer = 17
 motion_mode = 1
 script = ExtResource("1_6spgu")
@@ -46,10 +47,10 @@ autoplay = "Idle"
 shape = SubResource("RectangleShape2D_3eu7w")
 
 [node name="Wand" parent="." instance=ExtResource("4_fftte")]
-scale = Vector2(0.203125, 0.203125)
 
 [node name="TakeDamageHandler" type="Node" parent="."]
 script = ExtResource("4_t324w")
+can_take_damage = true
 health = 200
 
 [node name="PlayerCollisionHandler" type="Area2D" parent="." node_paths=PackedStringArray("actor")]

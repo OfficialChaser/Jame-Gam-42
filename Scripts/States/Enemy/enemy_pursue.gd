@@ -4,6 +4,7 @@ class_name EnemyPursue
 @export var speed : float
 @export var actor : CharacterBody2D
 @export var enemy_sprite : Sprite2D
+@export var animation_player : AnimationPlayer
 
 @onready var tile_map := get_tree().current_scene.get_node("GameTiles")
 @onready var player := get_tree().current_scene.get_node("Player")
@@ -88,6 +89,7 @@ func _physics_process(_delta):
 		is_moving = false
 
 func manage_sprite():
+	animation_player.play("Pursue")
 	if (player.global_position < actor.global_position):
 		enemy_sprite.flip_h = true
 	elif (player.global_position > actor.global_position):

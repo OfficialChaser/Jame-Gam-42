@@ -73,16 +73,11 @@ script = ExtResource("1_dft4f")
 position = Vector2(20, 0)
 
 [node name="WandSprite" type="Sprite2D" parent="SpriteHolder"]
-position = Vector2(30, 0)
-scale = Vector2(7, 7)
+position = Vector2(-10, 0)
 texture = ExtResource("2_hk7c0")
 
-[node name="HandsSprite" type="Sprite2D" parent="SpriteHolder"]
-position = Vector2(25, 0)
-scale = Vector2(4, 4)
-
 [node name="BulletMarker" type="Marker2D" parent="."]
-position = Vector2(50, 0)
+position = Vector2(7, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -90,3 +85,4 @@ libraries = {
 }
 
 [node name="GridHighlight" parent="." instance=ExtResource("3_35krf")]
+visible = false

@@ -6,6 +6,8 @@ class_name StateMachine
 var current_state : State
 var states := {}
 
+var enabled := true
+
 func _ready():
 	for child in get_children():
 		if child is State:
@@ -17,11 +19,11 @@ func _ready():
 		current_state = initial_state
 
 func _process(delta):
-	if current_state:
+	if current_state and enabled:
 		current_state.Update(delta)
 
 func _physics_process(delta):
-	if current_state:
+	if current_state and enabled:
 		current_state.Physics_Update(delta)
 
 func _on_state_transition(state, new_state_name):

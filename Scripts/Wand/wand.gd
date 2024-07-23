@@ -8,7 +8,6 @@ var wand_state := 0
 var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 
 @onready var gun_sprite = $SpriteHolder/WandSprite
-@onready var hands_sprite = $SpriteHolder/HandsSprite
 @onready var bullet_marker = $BulletMarker
 @onready var animation_player = $AnimationPlayer
 @onready var grid_highlight = $GridHighlight
@@ -45,6 +44,7 @@ func _input(event):
 				holding_shoot = false
 		WandStates.RESTORE:
 			if event.is_action("left_click"):
+				restore_tiles()
 				get_tree().current_scene.get_node("GameTiles").restore_tiles(get_global_mouse_position())
 
 # Rotation of gun and hands function 
@@ -60,18 +60,24 @@ func rotate_gun_and_player(flip : bool):
 		player_sprite.flip_h = flip
 		gun_sprite.flip_v = flip
 		if flip:
-			bullet_marker.position.y = 6
-			hands_sprite.position.y = -6
+			bullet_marker.position.y = 0
 		else:
 			bullet_marker.position.y = 0
-			hands_sprite.position.y = 0
 
 # Shooting mechanic and spawning bullet
 func shoot():
-	get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
-	animation_player.play("shoot")
-	spawn_bullet()
+	if GameManager.mana > GameManager.shooting_cost:
+		GameManager.decrease_mana(GameManager.shooting_cost)
+		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
+		animation_player.play("shoot")
+		spawn_bullet()
 
+func restore_tiles():
+	if GameManager.mana > GameManager.restoring_cost:
+		GameManager.decrease_mana(GameManager.restoring_cost)
+		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
+		animation_player.play("shoot")
+	
 func spawn_bullet():
 	var instance = bullet.instantiate()
 	instance.global_position = $BulletMarker.global_position

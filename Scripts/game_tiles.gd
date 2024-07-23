@@ -8,14 +8,18 @@ func _on_tile_decay_timer_timeout():
 	# Playing animation
 	decay_tile(tile_position)
 
-func check_overlapping_tile(actor : CharacterBody2D):
+func check_overlapping_tile(object : Node2D):
 	var tile_pos : Vector2i = local_to_map(
-		actor.global_position
+		object.global_position
 	)
 	var tile_data = get_cell_tile_data(0, tile_pos)
 	if tile_data.get_custom_data("pit"):
-		print("kill player")
-		get_tree().reload_current_scene()
+		if "Player" in object.name:
+			print("kill player")
+			GameManager.reset_stats()
+			get_tree().reload_current_scene()
+		else:
+			object.queue_free()
 
 func find_random_tile() -> Vector2i:
 	var tile_position : Vector2i
@@ -24,12 +28,14 @@ func find_random_tile() -> Vector2i:
 		# Picking a random tile to remove
 		tile_position = local_to_map(
 			Vector2(
-				randf_range(-250, 250),
-				randf_range(-150, 150)
+				randf_range(-175, 175),
+				randf_range(-100, 100)
 			)
 		)
 		var tile_data = get_cell_tile_data(0, tile_position)
-		if tile_data.get_custom_data("walkable"):
+		if tile_data.get_custom_data("walkable") and (
+			not tile_data.get_custom_data("breaking")
+		):
 			found_walkable_tile = true
 	return tile_position
 

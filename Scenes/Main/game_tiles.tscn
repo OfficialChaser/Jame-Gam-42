@@ -12,6 +12,7 @@ texture_region_size = Vector2i(12, 12)
 2:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_1/angular_velocity = 0.0
 2:0/0/custom_data_0 = true
+2:0/0/custom_data_2 = true
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
@@ -96,6 +97,8 @@ custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "pit"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "breaking"
+custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_g5tr2")
 
 [node name="GameTiles" type="TileMap"]
