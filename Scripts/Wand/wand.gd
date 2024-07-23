@@ -27,10 +27,14 @@ func _process(_delta):
 
 # Handling shooting input
 func _input(event):
+	
+	# Switch wand state after right click
 	if event.is_action_pressed("right_click"):
 		wand_state += 1
 		if wand_state > 1:
 			wand_state = 0
+	
+	# Do action depending on wand state
 	match wand_state:
 		WandStates.GUN:
 			if event.is_action_pressed("left_click"):

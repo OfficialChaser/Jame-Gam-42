@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://bteinqbxyigkb"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/base_enemy.gd" id="1_shc20"]
+[ext_resource type="Texture2D" uid="uid://diomu5xs0jytr" path="res://Assets/Skeleton/skeleton-sheet.png" id="2_k07jt"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="3_dr5u0"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_pursue.gd" id="4_3bd6n"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_spawn.gd" id="4_triuk"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_attack.gd" id="5_5urgr"]
+[ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="6_oxjfk"]
+[ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="7_6cnyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anvki"]
+size = Vector2(12, 12)
+
+[sub_resource type="Animation" id="Animation_8p1qn"]
+resource_name = "Attack"
+
+[sub_resource type="Animation" id="Animation_m4vqv"]
+resource_name = "Pursue"
+
+[sub_resource type="Animation" id="Animation_ntec6"]
+resource_name = "Spawn"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 7]
+}
+
+[sub_resource type="Animation" id="Animation_716xu"]
+resource_name = "Death"
+
+[sub_resource type="Animation" id="Animation_p782m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4xiu"]
+_data = {
+"Attack": SubResource("Animation_8p1qn"),
+"Death": SubResource("Animation_716xu"),
+"Pursue": SubResource("Animation_m4vqv"),
+"RESET": SubResource("Animation_p782m"),
+"Spawn": SubResource("Animation_ntec6")
+}
+
+[node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_shc20")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_k07jt")
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_anvki")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_dr5u0")
+initial_state = NodePath("EnemySpawn")
+
+[node name="EnemySpawn" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("4_triuk")
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite")]
+script = ExtResource("4_3bd6n")
+speed = 1.0
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+
+[node name="EnemyAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("5_5urgr")
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+damage = 20
+attack_range = 25.0
+
+[node name="TakeDamageHandler" type="Node" parent="."]
+script = ExtResource("6_oxjfk")
+health = 100
+
+[node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player")]
+script = ExtResource("7_6cnyp")
+actor = NodePath("..")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j4xiu")
+}
+autoplay = "Spawn"
+
+[connection signal="enable_damage" from="StateMachine/EnemySpawn" to="." method="_on_enemy_spawn_enable_damage"]

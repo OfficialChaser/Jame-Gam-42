@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Bullet/bullet.gd" id="1_r1kqj"]
 [ext_resource type="PackedScene" uid="uid://w4i4xitbsx2r" path="res://Scenes/Bullet/bullet_trail.tscn" id="2_iu3pr"]
-[ext_resource type="Texture2D" uid="uid://43rwjkvxm6rb" path="res://Bullet.png" id="3_3dl4n"]
+[ext_resource type="Texture2D" uid="uid://rnfuatvj17ki" path="res://Assets/12x12placeholder.png" id="3_nnl5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dulc0"]
 size = Vector2(6, 6)
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(2.25, 2.25)]
+"values": [Vector2(0.75, 0.75), Vector2(2.25, 2.25)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vtd4"]
@@ -66,7 +66,7 @@ shape = SubResource("RectangleShape2D_dulc0")
 [node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
 z_index = 1
 scale = Vector2(0.375, 0.375)
-texture = ExtResource("3_3dl4n")
+texture = ExtResource("3_nnl5w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteContainer/Sprite2D"]
 libraries = {

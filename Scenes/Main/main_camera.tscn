@@ -5,4 +5,4 @@
 [node name="MainCamera" type="Camera2D"]
 process_callback = 0
 script = ExtResource("1_wcpog")
-offset_factor = 0.02
+offset_factor = 0.079

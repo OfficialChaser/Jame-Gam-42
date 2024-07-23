@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://43rwjkvxm6rb"
-path="res://.godot/imported/Bullet.png-8556c7b1165e553b17f4d76e597a3ac5.ctex"
+uid="uid://c4r75fh1x0nv"
+path="res://.godot/imported/tilemapv2.png-7cc7a8613185af41c75b2b3273d4b462.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bullet.png"
-dest_files=["res://.godot/imported/Bullet.png-8556c7b1165e553b17f4d76e597a3ac5.ctex"]
+source_file="res://Assets/Tilemaps/tilemapv2.png"
+dest_files=["res://.godot/imported/tilemapv2.png-7cc7a8613185af41c75b2b3273d4b462.ctex"]
 
 [params]
 

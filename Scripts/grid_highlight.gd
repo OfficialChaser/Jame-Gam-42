@@ -5,6 +5,6 @@ func _ready():
 
 func _process(_delta):
 	global_position = snapped(
-		get_global_mouse_position() - Vector2(8, 8), 
-		Vector2(16,16)
-	) + Vector2(8, 8)
+		get_global_mouse_position() - Vector2(6, 6), 
+		Vector2(12,12)
+	) + Vector2(6, 6)
