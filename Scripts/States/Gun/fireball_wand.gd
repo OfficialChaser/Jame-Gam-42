@@ -40,7 +40,11 @@ func _check_input():
 	# Switch wand state after right click
 	if Input.is_action_just_pressed("right_click") and not reloading:
 		Transitioned.emit(self, "RestorationWand")
-
+		
+	if Input.is_action_just_pressed("Reload"):
+		reloading = true
+		animation_player.play("reload_fireball")
+	
 	if Input.is_action_just_pressed("left_click"):
 		holding_shoot = true
 

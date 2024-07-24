@@ -14,7 +14,7 @@ var rotating_back := false
 
 func Enter():
 	grid_highlight.visible = true
-	GameManager.current_spell = "RESTORATION"
+	GameManager.current_spell = "REPAIR"
 
 func Update(_delta):
 	if !reloading:
@@ -40,7 +40,11 @@ func check_input():
 	# Switch wand state after right click
 	if Input.is_action_just_pressed("right_click") and not reloading:
 		Transitioned.emit(self, "FireballWand")
-
+		
+	if Input.is_action_just_pressed("Reload"):
+		reloading = true
+		animation_player.play("reload_restoration")
+		
 	if Input.is_action_just_pressed("left_click"):
 		if ammo == 1:
 			restore_tiles()
@@ -51,7 +55,6 @@ func check_input():
 
 func restore_tiles():
 	if GameManager.mana > GameManager.restoring_cost and !reloading:
-		
 		var tiles = get_tree().current_scene.get_node("GameTiles")
 		tiles.restore_tiles(wand.get_global_mouse_position())
 		
@@ -61,7 +64,7 @@ func restore_tiles():
 		
 		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
 		animation_player.play("shoot")
-		grid_highlight.visible = false
+		grid_highlight.Repair()
 
 func end_reloading():
 	rotating_back = true

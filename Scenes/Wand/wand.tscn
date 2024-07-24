@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq6eftrbnag1o"]
+[gd_scene load_steps=15 format=3 uid="uid://dq6eftrbnag1o"]
 
 [ext_resource type="Script" path="res://Scripts/Wand/wand.gd" id="1_dft4f"]
 [ext_resource type="Texture2D" uid="uid://biw3m2acdx16g" path="res://Assets/Wand/wand.png" id="2_hk7c0"]
 [ext_resource type="PackedScene" uid="uid://cmk7nu4tph1id" path="res://Scenes/grid_highlight.tscn" id="3_35krf"]
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="4_pa5e7"]
+[ext_resource type="Texture2D" uid="uid://c1yxwkykcuomc" path="res://Assets/Grid/selectorv3.png" id="4_q2ln0"]
 [ext_resource type="Script" path="res://Scripts/States/Gun/fireball_wand.gd" id="5_thjny"]
 [ext_resource type="Script" path="res://Scripts/States/Gun/restoration_wand.gd" id="6_4b43r"]
 
@@ -44,34 +45,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_2427t"]
-resource_name = "shoot"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteHolder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(20, 0), Vector2(10, 0), Vector2(20, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteHolder:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_vfdya"]
@@ -180,12 +153,73 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_2427t"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 0), Vector2(10, 0), Vector2(20, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_irsre"]
 _data = {
 "RESET": SubResource("Animation_km4jw"),
 "reload_fireball": SubResource("Animation_vfdya"),
 "reload_restoration": SubResource("Animation_odk8w"),
 "shoot": SubResource("Animation_2427t")
+}
+
+[sub_resource type="Animation" id="Animation_jnixw"]
+resource_name = "Repair"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fklpx"]
+_data = {
+"Repair": SubResource("Animation_jnixw")
 }
 
 [node name="Wand" type="Node2D"]
@@ -208,7 +242,15 @@ libraries = {
 }
 
 [node name="GridHighlight" parent="." instance=ExtResource("3_35krf")]
-visible = false
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("4_q2ln0")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GridHighlight"]
+libraries = {
+"": SubResource("AnimationLibrary_fklpx")
+}
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_pa5e7")
