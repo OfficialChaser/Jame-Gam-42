@@ -70,4 +70,5 @@ func end_reloading():
 	rotating_back = true
 	grid_highlight.visible = true
 	reloading = false
-	ammo = 1
+	if (GameManager.mana > 0):
+		ammo = 1

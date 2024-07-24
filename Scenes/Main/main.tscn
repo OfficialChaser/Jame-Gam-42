@@ -32,8 +32,7 @@ autostart = true
 
 [node name="ManaSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
-[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="ManaSpawnTimer" to="." method="_on_mana_spawn_timer_timeout"]

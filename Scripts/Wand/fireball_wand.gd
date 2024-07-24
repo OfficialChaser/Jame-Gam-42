@@ -94,4 +94,8 @@ func rotate_wand_back():
 func end_reloading():
 	rotating_back = true
 	reloading = false
-	ammo = 15
+	if (GameManager.mana > 0):
+		if (GameManager.mana/2 > 15):
+			ammo = 15
+		else:
+			ammo = GameManager.mana/2

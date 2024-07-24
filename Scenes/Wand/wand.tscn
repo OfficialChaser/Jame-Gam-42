@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cmk7nu4tph1id" path="res://Scenes/grid_highlight.tscn" id="3_35krf"]
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="4_pa5e7"]
 [ext_resource type="Texture2D" uid="uid://c1yxwkykcuomc" path="res://Assets/Grid/selectorv3.png" id="4_q2ln0"]
-[ext_resource type="Script" path="res://Scripts/States/Gun/fireball_wand.gd" id="5_thjny"]
-[ext_resource type="Script" path="res://Scripts/States/Gun/restoration_wand.gd" id="6_4b43r"]
+[ext_resource type="Script" path="res://Scripts/Wand/fireball_wand.gd" id="6_p6ksq"]
+[ext_resource type="Script" path="res://Scripts/Wand/restoration_wand.gd" id="7_whgei"]
 
 [sub_resource type="Animation" id="Animation_km4jw"]
 length = 0.001
@@ -258,14 +258,14 @@ initial_state = NodePath("FireballWand")
 
 [node name="FireballWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "bullet_marker", "grid_highlight")]
 process_priority = 1
-script = ExtResource("5_thjny")
+script = ExtResource("6_p6ksq")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 bullet_marker = NodePath("../../BulletMarker")
 grid_highlight = NodePath("../../GridHighlight")
 
 [node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight")]
-script = ExtResource("6_4b43r")
+script = ExtResource("7_whgei")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 grid_highlight = NodePath("../../GridHighlight")

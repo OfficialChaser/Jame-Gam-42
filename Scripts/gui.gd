@@ -18,7 +18,7 @@ func _process(_delta):
 	last_spell = GameManager.current_spell
 
 func _on_mana_depletor_timeout():
-	GameManager.decrease_mana(1)
+	GameManager.decrease_mana(-1) #increases mana by 1
 
 func update_ammo(ammo : int):
 	if ui_ammo != ammo:
