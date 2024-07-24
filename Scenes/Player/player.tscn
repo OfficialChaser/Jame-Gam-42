@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://drav6jqmqj3v6"]
+[gd_scene load_steps=12 format=3 uid="uid://drav6jqmqj3v6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_6spgu"]
 [ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/placeholder.png" id="2_tx7up"]
 [ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/Wand/wand.tscn" id="4_fftte"]
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="4_t324w"]
 [ext_resource type="Script" path="res://Scripts/Player/player_collision_handler.gd" id="5_fkuyb"]
+[ext_resource type="FontFile" uid="uid://eiw8wgpdg0j3" path="res://Assets/Fonts/8BITv6.ttf" id="6_prdy7"]
 
 [sub_resource type="Animation" id="Animation_j748q"]
 resource_name = "Idle"
@@ -19,12 +20,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3eu7w"]
-size = Vector2(12, 12)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye5aj"]
 size = Vector2(14, 14)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 collision_layer = 17
 motion_mode = 1
@@ -61,3 +62,15 @@ actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollisionHandler"]
 shape = SubResource("RectangleShape2D_ye5aj")
+
+[node name="WarningLabel" type="Label" parent="."]
+visible = false
+modulate = Color(1, 0.172549, 0.341176, 1)
+offset_left = -13.0
+offset_top = -22.0
+offset_right = 14.0
+offset_bottom = -9.0
+theme_override_fonts/font = ExtResource("6_prdy7")
+theme_override_font_sizes/font_size = 5
+text = "OUT OF 
+AMMO!"

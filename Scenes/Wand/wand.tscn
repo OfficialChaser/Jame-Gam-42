@@ -215,12 +215,15 @@ script = ExtResource("4_pa5e7")
 initial_state = NodePath("FireballWand")
 
 [node name="FireballWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "bullet_marker", "grid_highlight")]
+process_priority = 1
 script = ExtResource("5_thjny")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 bullet_marker = NodePath("../../BulletMarker")
 grid_highlight = NodePath("../../GridHighlight")
 
-[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("grid_highlight")]
+[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight")]
 script = ExtResource("6_4b43r")
+wand = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
 grid_highlight = NodePath("../../GridHighlight")

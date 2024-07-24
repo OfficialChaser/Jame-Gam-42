@@ -13,7 +13,6 @@ var past_global_pos : Vector2
 var stationary : bool
 
 func _physics_process(_delta):
-	#print($TakeDamageHandler.health)
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = lerp(velocity, direction * speed, 0.1)
 	
@@ -36,3 +35,6 @@ func check_global_position():
 		stationary = true
 	else:
 		stationary = false
+
+func change_warning_label(status : bool):
+	$WarningLabel.visible = status

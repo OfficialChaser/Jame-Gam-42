@@ -10,30 +10,40 @@ var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 @export var grid_highlight : Sprite2D
 
 @onready var gui = get_tree().current_scene.get_node("CanvasLayer").get_node("GUI")
-
 var holding_shoot := false
 
-var ammo := 5
+@export var ammo := 15
 var reloading := false
+
+var rotating_back := false
 
 func Enter():
 	grid_highlight.visible = false
 	GameManager.current_spell = "FIREBALL"
 
 func Update(_delta):
-	wand.look_at(wand.get_global_mouse_position())
-	_check_autofire()
-	gui.update_ammo(ammo)
+	if !reloading:
+		gui.update_ammo(ammo)
+		if !wand.locked_rotation:
+			if rotating_back:
+				rotate_wand_back()
+			else:
+				wand.look_at(wand.get_global_mouse_position())
+	else:
+		gui.reloading_text()
 
-func _input(event):
+	_check_autofire()
+	_check_input()
+
+func _check_input():
 	var changed_spell := false
 	# Switch wand state after right click
-	if event.is_action_pressed("right_click") and not reloading:
+	if Input.is_action_just_pressed("right_click") and not reloading:
 		Transitioned.emit(self, "RestorationWand")
 
-	if event.is_action_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click"):
 		holding_shoot = true
-		
+
 		if ammo <= 0:
 			reloading = true
 			animation_player.play("reload_fireball")
@@ -41,7 +51,7 @@ func _input(event):
 		elif !animation_player.is_playing():
 			shoot()
 
-	if event.is_action_released("left_click"):
+	if Input.is_action_just_released("left_click"):
 		holding_shoot = false
 	
 	if changed_spell and animation_player.is_playing():
@@ -67,6 +77,17 @@ func _check_autofire():
 	if holding_shoot and !animation_player.is_playing() and ammo > 0:
 		shoot()
 
+func rotate_wand_back():
+	var prev_rotation = wand.rotation
+	var rot 
+	wand.look_at(round(wand.get_global_mouse_position()))
+	rot = wand.rotation
+	wand.rotation = prev_rotation
+	wand.rotation = move_toward(wand.rotation, rot, 0.2)
+	if wand.rotation == rot:
+		rotating_back = false
+
 func end_reloading():
+	rotating_back = true
 	reloading = false
-	ammo = 5
+	ammo = 15
