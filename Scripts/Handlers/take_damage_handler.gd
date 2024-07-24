@@ -18,6 +18,7 @@ func hit(damage : int):
 				pass
 			Type.ENEMY:
 				if hit_flash_player:
+					GameManager.slow_time()
 					hit_flash_player.play("Hit Flash")
 
 		health -= damage

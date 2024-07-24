@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [autoload]
 
-GameManager="*res://Scripts/GameManager.gd"
+GameManager="*res://GameManager.gd"
 
 [display]
 

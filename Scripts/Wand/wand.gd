@@ -11,72 +11,56 @@ var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 @onready var bullet_marker = $BulletMarker
 @onready var animation_player = $AnimationPlayer
 @onready var grid_highlight = $GridHighlight
+@onready var gui = get_tree().current_scene.get_node("CanvasLayer").get_node("GUI")
 
 var holding_shoot := false
 
-func _process(_delta):
-	look_at(get_global_mouse_position())
-	match wand_state:
-		WandStates.GUN:
-			grid_highlight.visible = false
-			_check_rotation()
-			_check_autofire()
-		WandStates.RESTORE:
-			grid_highlight.visible = true
+var fb_ammo := 5
+var max_fb_ammo := 5
+var reloading_fb := false
+
+var res_ammo := 1
+var reloading_res := false
+
+var reloading : bool
+var ammo : int
 
 # Handling shooting input
 func _input(event):
-	
-	# Switch wand state after right click
-	if event.is_action_pressed("right_click"):
-		wand_state += 1
-		if wand_state > 1:
-			wand_state = 0
-	
-	# Do action depending on wand state
-	match wand_state:
-		WandStates.GUN:
-			if event.is_action_pressed("left_click"):
-				holding_shoot = true
-				if !animation_player.is_playing():
-					shoot()
-			if event.is_action_released("left_click"):
-				holding_shoot = false
-		WandStates.RESTORE:
-			if event.is_action("left_click"):
-				restore_tiles()
-				get_tree().current_scene.get_node("GameTiles").restore_tiles(get_global_mouse_position())
-
-# Rotation of gun and hands function 
-func _check_rotation():
-	if get_global_mouse_position().x > get_parent().position.x:
-		rotate_gun_and_player(false)
-	elif get_global_mouse_position().x < get_parent().position.x:
-		rotate_gun_and_player(true)
-
-func rotate_gun_and_player(flip : bool):
-	var player_sprite = get_parent().get_node("Sprite2D")
-	if player_sprite:
-		player_sprite.flip_h = flip
-		gun_sprite.flip_v = flip
-		if flip:
-			bullet_marker.position.y = 0
-		else:
-			bullet_marker.position.y = 0
+	if false:
+		GameManager.current_spell = "RESTORATION"
+		if event.is_action("left_click"):
+			gui.update_ammo(ammo)
+			restore_tiles()
+			get_tree().current_scene.get_node("GameTiles").restore_tiles(get_global_mouse_position())
 
 # Shooting mechanic and spawning bullet
 func shoot():
-	if GameManager.mana > GameManager.shooting_cost:
+	print("this shouldnt happen")
+	if GameManager.mana > GameManager.shooting_cost and !reloading_fb and !reloading_res:
+		fb_ammo -= 1
+		gui.update_ammo(fb_ammo)
 		GameManager.decrease_mana(GameManager.shooting_cost)
 		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
 		animation_player.play("shoot")
 		spawn_bullet()
+		
+		if fb_ammo <= 0:
+			reloading_fb = true
+			animation_player.play("reload")
 
 func restore_tiles():
-	if GameManager.mana > GameManager.restoring_cost:
+	if GameManager.mana > GameManager.restoring_cost and !reloading:
+		res_ammo -= 1
+		gui.update_ammo(res_ammo)
 		GameManager.decrease_mana(GameManager.restoring_cost)
 		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)
 		animation_player.play("shoot")
+		
+		# Reloading
+		reloading_res = true
+		await get_tree().create_timer(0.2).timeout
+		animation_player.play("reload")
 	
 func spawn_bullet():
 	var instance = bullet.instantiate()
@@ -88,3 +72,13 @@ func spawn_bullet():
 func _check_autofire():
 	if holding_shoot and !animation_player.is_playing():
 		shoot()
+
+func end_reloading():
+	if GameManager.current_spell == "FIREBALL":
+		fb_ammo = max_fb_ammo
+		gui.update_ammo(fb_ammo)
+		reloading_fb = false
+	elif GameManager.current_spell == "RESTORATION":
+		res_ammo = 1
+		gui.update_ammo(res_ammo)
+		reloading_res = false

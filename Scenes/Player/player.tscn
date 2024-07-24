@@ -29,7 +29,7 @@ z_index = 5
 collision_layer = 17
 motion_mode = 1
 script = ExtResource("1_6spgu")
-speed = 200.0
+speed = 150.0
 acc = 50.0
 dec = 60.0
 

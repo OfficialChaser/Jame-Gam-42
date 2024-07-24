@@ -29,7 +29,7 @@ func find_random_tile() -> Vector2i:
 		tile_position = local_to_map(
 			Vector2(
 				randf_range(-175, 175),
-				randf_range(-100, 100)
+				randf_range(-85, 100)
 			)
 		)
 		var tile_data = get_cell_tile_data(0, tile_position)

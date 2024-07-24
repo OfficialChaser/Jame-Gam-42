@@ -11,12 +11,13 @@
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="8_kvohp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbl3r"]
+resource_local_to_scene = true
 shader = ExtResource("2_6vf1u")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anvki"]
-size = Vector2(12, 12)
+size = Vector2(11, 12)
 
 [sub_resource type="Animation" id="Animation_8p1qn"]
 resource_name = "Attack"
@@ -186,7 +187,7 @@ hframes = 27
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_anvki")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -217,7 +218,7 @@ attack_range = 25.0
 [node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("destroy_handler", "hit_flash_player")]
 script = ExtResource("7_4ga62")
 type = 1
-health = 100
+health = 60
 destroy_handler = NodePath("../DestroyHandler")
 hit_flash_player = NodePath("../HitFlashAnimPlayer")
 

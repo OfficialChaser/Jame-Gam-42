@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/grid_highlight.gd" id="2_y8j81"]
 
 [node name="GridHighlight" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.47451)
 position = Vector2(0, -1)
 texture = ExtResource("1_0yi3u")
 script = ExtResource("2_y8j81")

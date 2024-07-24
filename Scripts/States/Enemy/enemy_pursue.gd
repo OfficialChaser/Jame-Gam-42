@@ -80,7 +80,7 @@ func check_walkability(region_size : Vector2i, region_position : Vector2i):
 				astar_grid.set_point_solid(tile_position)
 
 func _physics_process(_delta):
-	if (is_moving):
+	if (is_moving and Engine.time_scale > 0.5):
 		enemy_sprite.global_position = enemy_sprite.global_position.move_toward(actor.global_position, speed)
 		
 		if (enemy_sprite.global_position != actor.global_position):
