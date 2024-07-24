@@ -8,6 +8,7 @@ var tile_position : Vector2i
 
 func _process(_delta):
 	game_tiles.check_overlapping_tile(self)
+	$Sprite2D/AnimationPlayer.play("Glint")
 
 func _on_body_entered(body):
 	if body.name == "Player":

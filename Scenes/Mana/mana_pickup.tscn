@@ -1,17 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://detfmawwmtuue"]
+[gd_scene load_steps=7 format=3 uid="uid://detfmawwmtuue"]
 
 [ext_resource type="Script" path="res://Scripts/mana_pickup.gd" id="1_q748n"]
-[ext_resource type="Texture2D" uid="uid://rnfuatvj17ki" path="res://Assets/12x12placeholder.png" id="2_aw525"]
+[ext_resource type="Texture2D" uid="uid://cp0kdvbr68qvv" path="res://Assets/Mana/Mana-sheetv2.png" id="2_d8wwj"]
+
+[sub_resource type="Animation" id="Animation_llnqh"]
+resource_name = "Glint"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4cyrw"]
+_data = {
+"Glint": SubResource("Animation_llnqh")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wrx3"]
 size = Vector2(12, 12)
+
+[sub_resource type="Curve" id="Curve_67tvw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.285714), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="ManaPickup" type="Area2D"]
 script = ExtResource("1_q748n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.247059, 0.47451, 0.52549, 1)
-texture = ExtResource("2_aw525")
+texture = ExtResource("2_d8wwj")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_4cyrw")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5wrx3")
@@ -19,6 +50,20 @@ shape = SubResource("RectangleShape2D_5wrx3")
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 12.0
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_67tvw")
+color = Color(0.247059, 0.47451, 0.52549, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
