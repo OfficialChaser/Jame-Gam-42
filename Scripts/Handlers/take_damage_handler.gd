@@ -15,7 +15,11 @@ func hit(damage : int):
 	if can_take_damage:
 		match type:
 			Type.PLAYER:
-				pass
+				if hit_flash_player:
+					var camera = get_tree().get_first_node_in_group("main_camera")
+					camera.apply_shake(2, 7)
+					GameManager.slow_time()
+					hit_flash_player.play("Hit Flash")
 			Type.ENEMY:
 				if hit_flash_player:
 					GameManager.slow_time()

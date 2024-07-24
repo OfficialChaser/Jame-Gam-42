@@ -11,10 +11,12 @@ func _ready():
 	spawn_enemy()
 
 func _on_enemy_spawn_timer_timeout():
-	spawn_enemy()
+	if !GameManager.game_over:
+		spawn_enemy()
 
 func _on_mana_spawn_timer_timeout():
-	spawn_mana()
+	if !GameManager.game_over:
+		spawn_mana()
 
 func spawn_object(object : PackedScene) -> Node2D:
 	var instance = object.instantiate()

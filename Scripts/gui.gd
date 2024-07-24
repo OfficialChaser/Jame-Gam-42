@@ -23,7 +23,9 @@ func _process(_delta):
 	update_health()
 
 func _on_mana_depletor_timeout():
-	GameManager.increase_mana(1)
+	if GameManager.game_over:
+		return
+	GameManager.decrease_mana(1)
 
 func update_ammo(ammo : int):
 	if ui_ammo != ammo:

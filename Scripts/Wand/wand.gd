@@ -14,6 +14,10 @@ var locked_rotation := false
 @onready var state_machine = $StateMachine
 
 func _process(_delta):
+	if GameManager.game_over:
+		visible = false
+		return
+
 	_manage_rotation()
 	_determine_sprite_texture()
 

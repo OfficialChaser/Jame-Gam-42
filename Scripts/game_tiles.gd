@@ -1,8 +1,11 @@
 extends TileMap
 
+@onready var player = get_tree().get_first_node_in_group("Player")
+
 func _on_tile_decay_timer_timeout():
-	
-	
+	if GameManager.game_over:
+		return
+		
 	var tile_position = find_random_tile()
 	
 	# Playing animation
@@ -15,9 +18,8 @@ func check_overlapping_tile(object : Node2D):
 	var tile_data = get_cell_tile_data(0, tile_pos)
 	if tile_data.get_custom_data("pit"):
 		if "Player" in object.name:
-			print("kill player")
-			GameManager.reset_stats()
-			get_tree().reload_current_scene()
+			GameManager.place_of_death = map_to_local(tile_pos)
+			player.die_by_falling()
 		else:
 			object.queue_free()
 

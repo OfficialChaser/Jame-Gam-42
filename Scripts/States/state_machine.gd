@@ -19,11 +19,11 @@ func _ready():
 		current_state = initial_state
 
 func _process(delta):
-	if current_state and enabled:
+	if current_state and enabled and !GameManager.game_over:
 		current_state.Update(delta)
 
 func _physics_process(delta):
-	if current_state and enabled:
+	if current_state and enabled and !GameManager.game_over:
 		current_state.Physics_Update(delta)
 
 func _on_state_transition(state, new_state_name):

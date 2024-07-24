@@ -52,6 +52,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -1)
 amount = 10
 lifetime = 0.5
 emission_shape = 1

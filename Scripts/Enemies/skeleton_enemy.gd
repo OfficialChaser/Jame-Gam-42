@@ -4,3 +4,7 @@ extends CharacterBody2D
 
 func _on_enemy_spawn_enable_damage():
 	take_damage_handler.can_take_damage = true
+
+func _process(_delta):
+	if GameManager.game_over:
+		$AnimationPlayer.stop()

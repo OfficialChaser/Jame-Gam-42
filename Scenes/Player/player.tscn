@@ -1,22 +1,160 @@
-[gd_scene load_steps=16 format=3 uid="uid://drav6jqmqj3v6"]
+[gd_scene load_steps=23 format=3 uid="uid://drav6jqmqj3v6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_6spgu"]
-[ext_resource type="Texture2D" uid="uid://bxm7vc45v2b8q" path="res://Assets/Placeholders/placeholder.png" id="2_2x6qn"]
+[ext_resource type="Texture2D" uid="uid://cr6tnsr1q0se6" path="res://Assets/Player/player.png" id="2_1s1dp"]
+[ext_resource type="Shader" uid="uid://dnv5d7khiv3x5" path="res://hit_flash.tres" id="2_42ch6"]
 [ext_resource type="PackedScene" uid="uid://dq6eftrbnag1o" path="res://Scenes/Wand/wand.tscn" id="4_fftte"]
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="4_t324w"]
 [ext_resource type="Script" path="res://Scripts/Player/player_collision_handler.gd" id="5_fkuyb"]
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="5_xh3ly"]
 [ext_resource type="Texture2D" uid="uid://bkl0p4jocb8d4" path="res://Assets/Misc/outofammo.png" id="7_2pmcm"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_10jkj"]
+shader = ExtResource("2_42ch6")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [sub_resource type="Animation" id="Animation_j748q"]
 resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
 
 [sub_resource type="Animation" id="Animation_kel6y"]
 resource_name = "Run"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_h2rtb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8l6j7"]
+resource_name = "Fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 12.5664]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g6vuu"]
 _data = {
+"Fall": SubResource("Animation_8l6j7"),
 "Idle": SubResource("Animation_j748q"),
+"RESET": SubResource("Animation_h2rtb"),
 "Run": SubResource("Animation_kel6y")
 }
 
@@ -64,6 +202,43 @@ _data = {
 "RESET": SubResource("Animation_5wggm")
 }
 
+[sub_resource type="Animation" id="Animation_78e0i"]
+resource_name = "Hit Flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_6umb6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_64f3u"]
+_data = {
+"Hit Flash": SubResource("Animation_78e0i"),
+"RESET": SubResource("Animation_6umb6")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 collision_layer = 17
@@ -74,8 +249,10 @@ acc = 50.0
 dec = 60.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_2x6qn")
+material = SubResource("ShaderMaterial_10jkj")
+texture = ExtResource("2_1s1dp")
+offset = Vector2(0, -7)
+hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -84,19 +261,25 @@ libraries = {
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_3eu7w")
 
 [node name="Wand" parent="." instance=ExtResource("4_fftte")]
 
-[node name="TakeDamageHandler" type="Node" parent="."]
+[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("destroy_handler", "hit_flash_player")]
 script = ExtResource("4_t324w")
 can_take_damage = true
 health = 100
+destroy_handler = NodePath("../DestroyHandler")
+hit_flash_player = NodePath("../HitFlashAnimPlayer")
 
-[node name="DestroyHandler" type="Node" parent="."]
+[node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player")]
 script = ExtResource("5_xh3ly")
+actor = NodePath("..")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
 
 [node name="PlayerCollisionHandler" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+visible = false
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("5_fkuyb")
@@ -116,3 +299,8 @@ libraries = {
 "": SubResource("AnimationLibrary_vh3vy")
 }
 autoplay = "Pulse"
+
+[node name="HitFlashAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_64f3u")
+}

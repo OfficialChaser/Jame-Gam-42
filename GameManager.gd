@@ -1,11 +1,17 @@
 extends Node
 
 var score := 0
-var mana := 100
+var mana := 100:
+	set (new_value):
+		mana = clamp(new_value, 0, 100)
+
 var shooting_cost := 2
 var restoring_cost := 5
 
 var current_spell := "FIREBALL"
+
+var place_of_death : Vector2
+var game_over := false
 
 func _process(_delta):
 	pass
