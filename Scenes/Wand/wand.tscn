@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dq6eftrbnag1o"]
+[gd_scene load_steps=18 format=3 uid="uid://dq6eftrbnag1o"]
 
 [ext_resource type="Script" path="res://Scripts/Wand/wand.gd" id="1_dft4f"]
 [ext_resource type="Texture2D" uid="uid://biw3m2acdx16g" path="res://Assets/Wand/wand.png" id="2_hk7c0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1yxwkykcuomc" path="res://Assets/Grid/selectorv3.png" id="4_q2ln0"]
 [ext_resource type="Script" path="res://Scripts/Wand/fireball_wand.gd" id="6_p6ksq"]
 [ext_resource type="Script" path="res://Scripts/Wand/restoration_wand.gd" id="7_whgei"]
+[ext_resource type="Texture2D" uid="uid://b7qgevyvyqxo4" path="res://Assets/Wand/wand-sheet.png" id="8_wkiy3"]
 
 [sub_resource type="Animation" id="Animation_km4jw"]
 length = 0.001
@@ -216,11 +217,33 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"unlock_movement"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fklpx"]
 _data = {
 "Repair": SubResource("Animation_jnixw")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofpns"]
+atlas = ExtResource("8_wkiy3")
+region = Rect2(0, 5, 12, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa2sl"]
+atlas = ExtResource("8_wkiy3")
+region = Rect2(36, 5, 12, 2)
 
 [node name="Wand" type="Node2D"]
 z_index = 6
@@ -269,3 +292,13 @@ script = ExtResource("7_whgei")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 grid_highlight = NodePath("../../GridHighlight")
+
+[node name="WandSprites" type="Node" parent="."]
+
+[node name="FBSprite" type="Sprite2D" parent="WandSprites"]
+visible = false
+texture = SubResource("AtlasTexture_ofpns")
+
+[node name="RESSprite" type="Sprite2D" parent="WandSprites"]
+visible = false
+texture = SubResource("AtlasTexture_aa2sl")

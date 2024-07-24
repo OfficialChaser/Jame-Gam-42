@@ -1,7 +1,8 @@
 extends State
 class_name EnemyPursue
 
-@export var speed : float
+var speed := randf_range(0.8, 1.2)
+var mana_to_give : int
 @export var actor : CharacterBody2D
 @export var enemy_sprite : Sprite2D
 @export var animation_player : AnimationPlayer
@@ -14,6 +15,8 @@ var astar_grid: AStarGrid2D
 var is_moving : bool
 
 func Enter():
+	mana_to_give = int(5 * speed)
+	print(mana_to_give)
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16)

@@ -10,6 +10,9 @@ var current_spell := "FIREBALL"
 func _process(_delta):
 	pass
 
+func increase_mana(amt : int):
+	mana += amt
+
 func decrease_mana(amt : int):
 	mana -= amt
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqdgf4ri7ealj"]
+[gd_scene load_steps=13 format=3 uid="uid://dqdgf4ri7ealj"]
 
 [ext_resource type="Script" path="res://Scripts/gui.gd" id="1_71tic"]
 [ext_resource type="FontFile" uid="uid://eiw8wgpdg0j3" path="res://Assets/Fonts/8BITv6.ttf" id="2_kneqf"]
@@ -120,6 +120,67 @@ _data = {
 "Reloading": SubResource("Animation_muxdu")
 }
 
+[sub_resource type="Animation" id="Animation_nfs53"]
+resource_name = "Damaged"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.921569, 0.933333, 0.713726, 1), Color(0.921569, 0.223529, 0.305882, 1), Color(0.921569, 0.933333, 0.713726, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wkbm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.921569, 0.933333, 0.713726, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3mw3j"]
+_data = {
+"Damaged": SubResource("Animation_nfs53"),
+"RESET": SubResource("Animation_wkbm6")
+}
+
 [node name="GUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -152,6 +213,7 @@ wait_time = 3.0
 autostart = true
 
 [node name="SpellLabel" type="Label" parent="."]
+modulate = Color(0.921569, 0.933333, 0.713726, 1)
 layout_mode = 0
 offset_left = 7.0
 offset_top = 7.0
@@ -167,6 +229,7 @@ libraries = {
 }
 
 [node name="AmmoLabel" type="Label" parent="."]
+modulate = Color(0.921569, 0.933333, 0.713726, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -184,6 +247,27 @@ text = "AMMO: 5/50"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AmmoLabel"]
 libraries = {
 "": SubResource("AnimationLibrary_58so3")
+}
+
+[node name="HealthLabel" type="Label" parent="."]
+modulate = Color(0.921569, 0.933333, 0.713726, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -255.0
+offset_top = 7.0
+offset_right = -10.0
+offset_bottom = 32.0
+grow_horizontal = 0
+pivot_offset = Vector2(245, 0)
+theme_override_fonts/font = ExtResource("2_kneqf")
+theme_override_font_sizes/font_size = 25
+text = "Health: 100"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HealthLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_3mw3j")
 }
 
 [connection signal="timeout" from="ManaDepletor" to="." method="_on_mana_depletor_timeout"]

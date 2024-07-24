@@ -202,7 +202,6 @@ animation_player = NodePath("../../AnimationPlayer")
 
 [node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
 script = ExtResource("5_kiwuy")
-speed = 1.0
 actor = NodePath("../..")
 enemy_sprite = NodePath("../../EnemySprite")
 animation_player = NodePath("../../AnimationPlayer")
@@ -212,7 +211,7 @@ script = ExtResource("6_8nftc")
 actor = NodePath("../..")
 enemy_sprite = NodePath("../../EnemySprite")
 animation_player = NodePath("../../AnimationPlayer")
-damage = 20
+damage = 10
 attack_range = 25.0
 
 [node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("destroy_handler", "hit_flash_player")]

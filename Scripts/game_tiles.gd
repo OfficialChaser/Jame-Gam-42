@@ -39,14 +39,24 @@ func find_random_tile() -> Vector2i:
 			found_walkable_tile = true
 	return tile_position
 
-func restore_tiles(pos : Vector2):
+func restore_tiles(pos : Vector2) -> bool:
+	var can_restore_tiles := false
 	var middle_tile_pos = local_to_map(pos)
-	for x in [middle_tile_pos.x - 1, middle_tile_pos.x, middle_tile_pos.x + 1]:
-		for y in [middle_tile_pos.y - 1, middle_tile_pos.y, middle_tile_pos.y + 1]:
-			var tile_position = Vector2i(x, y)
-			var tile_data = get_cell_tile_data(0, tile_position)
-			if tile_data.get_custom_data("pit"):
-				set_cell(0, tile_position, 0, Vector2i(1, 0))
+	var middle_tile_data = get_cell_tile_data(0, middle_tile_pos)
+	
+	if middle_tile_data.get_custom_data("walkable") or middle_tile_data.get_custom_data("pit"):
+		can_restore_tiles = true
+		
+	if can_restore_tiles:
+		for x in [middle_tile_pos.x - 1, middle_tile_pos.x, middle_tile_pos.x + 1]:
+			for y in [middle_tile_pos.y - 1, middle_tile_pos.y, middle_tile_pos.y + 1]:
+				var tile_position = Vector2i(x, y)
+				var tile_data = get_cell_tile_data(0, tile_position)
+				if tile_data.get_custom_data("pit"):
+					set_cell(0, tile_position, 0, Vector2i(1, 0))
+		return true
+	else:
+		return false
 
 
 # Tile Animation

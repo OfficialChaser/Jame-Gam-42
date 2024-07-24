@@ -13,6 +13,7 @@ var reloading := false
 var rotating_back := false
 
 func Enter():
+	
 	grid_highlight.visible = true
 	GameManager.current_spell = "REPAIR"
 
@@ -56,8 +57,12 @@ func check_input():
 func restore_tiles():
 	if GameManager.mana > GameManager.restoring_cost and !reloading:
 		var tiles = get_tree().current_scene.get_node("GameTiles")
-		tiles.restore_tiles(wand.get_global_mouse_position())
-		
+		var restored_tiles : bool = tiles.restore_tiles(
+			wand.get_global_mouse_position()
+		)
+		if !restored_tiles:
+			return
+
 		ammo -= 1
 		
 		GameManager.decrease_mana(GameManager.restoring_cost)
