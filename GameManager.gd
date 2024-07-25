@@ -4,6 +4,7 @@ var score := 0
 
 var enemies_killed := 0
 var mana_gained := 0
+var seconds_survived := 0
 
 var mana := 100:
 	set (new_value):
@@ -18,6 +19,8 @@ var current_spell := "FIREBALL"
 var place_of_death : Vector2
 var game_over := false
 
+var queued_end := false
+
 func _process(_delta):
 	if mana <= 5:
 		mana_pickup_amt = 20
@@ -25,10 +28,15 @@ func _process(_delta):
 		mana_pickup_amt = 10
 	else:
 		mana_pickup_amt = 5
+		
+	if game_over and !queued_end:
+		print(mana_gained)
+		print(enemies_killed)
+		print(seconds_survived)
+		queued_end = true
 
 func increase_mana(amt : int):
 	mana += amt
-	mana_gained += amt
 
 func decrease_mana(amt : int):
 	mana -= amt

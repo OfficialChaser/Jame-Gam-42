@@ -22,6 +22,7 @@ func _on_body_entered(body):
 		queue_deletion = true
 		
 func delete():
+	GameManager.mana_gained += mana_amount  
 	spawn_effect()
 	queue_free()
 

@@ -43,3 +43,4 @@ func spawn_mana():
 	instance.name = "ManaPickup" + str(num)
 	instance.tile_position = tile_position
 	add_child(instance)
+
