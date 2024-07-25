@@ -7,7 +7,11 @@ signal enable_damage
 @export var enemy_sprite : Sprite2D
 @export var animation_player : AnimationPlayer
 
+@export var sfx : AudioStreamPlayer2D
+
 func Enter():
+	if sfx:
+		sfx.play()
 	animation_player.animation_finished.connect(_on_animation_finished)
 	animation_player.play("Spawn")
 

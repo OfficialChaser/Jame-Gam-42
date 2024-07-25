@@ -15,12 +15,13 @@ func destroy_with_reward():
 	
 	# Disable character body
 	actor.get_node("CollisionShape2D").disabled = true
-
+	GameManager.enemies_killed
 	# Play animation if there is one
 	if animation_player:
 		# Animation needs to call queue free
 		animation_player.play("Death")
 		actor.z_index = 0
+	
 	else:
 		spawn_mana()
 		queue_free()

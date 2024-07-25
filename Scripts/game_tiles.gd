@@ -2,6 +2,7 @@ extends TileMap
 
 @onready var player = get_tree().get_first_node_in_group("Player")
 @onready var circle_highlight = get_tree().get_first_node_in_group("circle_highlight")
+@onready var tile_decay_sfx = $TileDecaySFX
 
 func _on_tile_decay_timer_timeout():
 	if GameManager.game_over:
@@ -12,6 +13,8 @@ func _on_tile_decay_timer_timeout():
 	circle_highlight.global_position = map_to_local(tile_position)
 	
 	# Playing animation
+	tile_decay_sfx.global_position = circle_highlight.global_position
+	tile_decay_sfx.play()
 	decay_tile(tile_position)
 
 func check_overlapping_tile(object : Node2D):

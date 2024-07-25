@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bteinqbxyigkb"]
+[gd_scene load_steps=22 format=3 uid="uid://bteinqbxyigkb"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/skeleton_enemy.gd" id="1_6debp"]
 [ext_resource type="Shader" uid="uid://dnv5d7khiv3x5" path="res://hit_flash.tres" id="2_6vf1u"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_attack.gd" id="6_8nftc"]
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="7_4ga62"]
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="8_kvohp"]
+[ext_resource type="AudioStream" uid="uid://cmynray7pagjj" path="res://SFX/JameGam42 SkeleSpawn.wav" id="10_wytna"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbl3r"]
 resource_local_to_scene = true
@@ -209,11 +210,12 @@ shape = SubResource("RectangleShape2D_anvki")
 script = ExtResource("3_38bit")
 initial_state = NodePath("EnemySpawn")
 
-[node name="EnemySpawn" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+[node name="EnemySpawn" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player", "sfx")]
 script = ExtResource("4_cnq65")
 actor = NodePath("../..")
 enemy_sprite = NodePath("../../EnemySprite")
 animation_player = NodePath("../../AnimationPlayer")
+sfx = NodePath("../../SpawnSFX")
 
 [node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
 script = ExtResource("5_kiwuy")
@@ -246,7 +248,7 @@ script = ExtResource("8_kvohp")
 actor = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 state_machine = NodePath("../StateMachine")
-mana_amount = 15
+mana_amount = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -258,5 +260,10 @@ autoplay = "Spawn"
 libraries = {
 "": SubResource("AnimationLibrary_u1a0e")
 }
+
+[node name="SpawnSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_wytna")
+volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="enable_damage" from="StateMachine/EnemySpawn" to="." method="_on_enemy_spawn_enable_damage"]

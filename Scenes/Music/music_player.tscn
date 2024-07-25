@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dglr8okfwektm"]
+
+[ext_resource type="AudioStream" uid="uid://cmukxj873tghr" path="res://Music/JameGam42 Menu Music.wav" id="1_3imxv"]
+[ext_resource type="Script" path="res://Scripts/Music/music_player.gd" id="1_5ghfv"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_3imxv")
+bus = &"Music"
+script = ExtResource("1_5ghfv")

@@ -13,6 +13,7 @@ var locked_rotation := false
 @onready var wand_sprite = $SpriteHolder/WandSprite
 @onready var state_machine = $StateMachine
 
+
 func _process(_delta):
 	if GameManager.game_over:
 		visible = false

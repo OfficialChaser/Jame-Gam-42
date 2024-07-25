@@ -9,6 +9,8 @@ var bullet := preload("res://Scenes/Bullet/bullet.tscn")
 @export var bullet_marker : Marker2D
 @export var grid_highlight : Sprite2D
 
+@export var sfx : AudioStreamPlayer2D
+
 @onready var gui = get_tree().current_scene.get_node("CanvasLayer").get_node("GUI")
 var holding_shoot := false
 
@@ -70,6 +72,7 @@ func spawn_bullet():
 # Shooting mechanic and spawning bullet
 func shoot():
 	if GameManager.mana > GameManager.shooting_cost and !reloading:
+		sfx.play()
 		ammo -= 1
 		GameManager.decrease_mana(GameManager.shooting_cost)
 		get_tree().current_scene.get_node("MainCamera").apply_shake(1, 6)

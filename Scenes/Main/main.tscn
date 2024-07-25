@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0sv11oa06rv"]
+[gd_scene load_steps=13 format=3 uid="uid://0sv11oa06rv"]
 
 [ext_resource type="Script" path="res://Scripts/Main/main.gd" id="1_3j5qx"]
 [ext_resource type="PackedScene" uid="uid://ond57oqk3mow" path="res://Scenes/Main/main_camera.tscn" id="1_caga4"]
@@ -7,7 +7,23 @@
 [ext_resource type="PackedScene" uid="uid://bteinqbxyigkb" path="res://Scenes/Enemies/skeleton_enemy.tscn" id="2_obtcq"]
 [ext_resource type="PackedScene" uid="uid://chjepiwpg4oln" path="res://Scenes/Enemies/zombie_enemy.tscn" id="3_5h82y"]
 [ext_resource type="PackedScene" uid="uid://bow61vbksbqlh" path="res://Scenes/Main/game_tiles.tscn" id="3_r8el6"]
+[ext_resource type="AudioStream" uid="uid://xgwhbkiim4u1" path="res://Music/JameGam42 Main Theme.wav" id="4_fdohr"]
 [ext_resource type="PackedScene" uid="uid://6ueijcoufwq5" path="res://Scenes/circle_highlight.tscn" id="8_64rir"]
+
+[sub_resource type="Animation" id="Animation_ki73a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_bdalj"]
 resource_name = "Red Flash"
@@ -25,21 +41,6 @@ tracks/0/keys = {
 "values": [Color(1, 0.746939, 0.705624, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ki73a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x6gwf"]
 _data = {
 "RESET": SubResource("Animation_ki73a"),
@@ -49,6 +50,7 @@ _data = {
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3j5qx")
 enemies = Array[PackedScene]([ExtResource("2_obtcq"), ExtResource("3_5h82y")])
+main_music = ExtResource("4_fdohr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

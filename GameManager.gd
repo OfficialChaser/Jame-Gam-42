@@ -1,6 +1,10 @@
 extends Node
 
 var score := 0
+
+var enemies_killed := 0
+var mana_gained := 0
+
 var mana := 100:
 	set (new_value):
 		mana = clamp(new_value, 0, 100)
@@ -24,15 +28,19 @@ func _process(_delta):
 
 func increase_mana(amt : int):
 	mana += amt
+	mana_gained += amt
 
 func decrease_mana(amt : int):
 	mana -= amt
 
 func reset_stats():
 	score = 0
+	enemies_killed = 0
 	mana = 100
 	shooting_cost = 2
 	restoring_cost = 5
+	place_of_death = Vector2.ZERO
+	game_over = false
 
 func slow_time():
 	Engine.time_scale = 0.05

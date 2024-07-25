@@ -4,11 +4,14 @@ extends Node2D
 
 @export var enemies : Array[PackedScene]
 
+@export var main_music : AudioStream
+
 var skeleton_enemy := preload("res://Scenes/Enemies/skeleton_enemy.tscn")
 var mana_pickup := preload("res://Scenes/Mana/mana_pickup.tscn")
 var num = 1
 
 func _ready():
+	MusicPlayer.change_music(main_music)
 	spawn_mana()
 	spawn_enemy()
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bow61vbksbqlh"]
+[gd_scene load_steps=6 format=3 uid="uid://bow61vbksbqlh"]
 
 [ext_resource type="Texture2D" uid="uid://noxnfwh4y53" path="res://Assets/Tilemaps/tilemapv5.png" id="1_cb71a"]
 [ext_resource type="Script" path="res://Scripts/game_tiles.gd" id="2_pwm7x"]
+[ext_resource type="AudioStream" uid="uid://ik3smthlqql4" path="res://SFX/JameGam42 Arena Crumble.wav" id="3_en6h7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g5tr2"]
 texture = ExtResource("1_cb71a")
@@ -109,5 +110,9 @@ script = ExtResource("2_pwm7x")
 
 [node name="TileDecayTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="TileDecaySFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_en6h7")
+bus = &"SFX"
 
 [connection signal="timeout" from="TileDecayTimer" to="." method="_on_tile_decay_timer_timeout"]
