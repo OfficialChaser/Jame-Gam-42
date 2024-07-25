@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dq6eftrbnag1o"]
+[gd_scene load_steps=20 format=3 uid="uid://dq6eftrbnag1o"]
 
 [ext_resource type="Script" path="res://Scripts/Wand/wand.gd" id="1_dft4f"]
 [ext_resource type="Texture2D" uid="uid://biw3m2acdx16g" path="res://Assets/Wand/wand.png" id="2_hk7c0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Wand/restoration_wand.gd" id="7_whgei"]
 [ext_resource type="Texture2D" uid="uid://b7qgevyvyqxo4" path="res://Assets/Wand/wand-sheet.png" id="8_wkiy3"]
 [ext_resource type="AudioStream" uid="uid://pypn6udodnyw" path="res://SFX/JameGam42 Wand Shoot.wav" id="9_5d1fv"]
+[ext_resource type="AudioStream" uid="uid://ckur1yigpxo02" path="res://SFX/repair.wav" id="10_52as6"]
 
 [sub_resource type="Animation" id="Animation_km4jw"]
 length = 0.001
@@ -290,11 +291,12 @@ bullet_marker = NodePath("../../BulletMarker")
 grid_highlight = NodePath("../../GridHighlight")
 sfx = NodePath("../../ShootSFX")
 
-[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight")]
+[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight", "restoreSFX")]
 script = ExtResource("7_whgei")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 grid_highlight = NodePath("../../GridHighlight")
+restoreSFX = NodePath("../../RestoreSFX")
 
 [node name="WandSprites" type="Node" parent="."]
 
@@ -309,3 +311,6 @@ texture = SubResource("AtlasTexture_aa2sl")
 [node name="ShootSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_5d1fv")
 volume_db = 4.0
+
+[node name="RestoreSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_52as6")

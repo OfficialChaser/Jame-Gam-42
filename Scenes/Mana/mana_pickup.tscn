@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://detfmawwmtuue"]
+[gd_scene load_steps=8 format=3 uid="uid://detfmawwmtuue"]
 
 [ext_resource type="Script" path="res://Scripts/mana_pickup.gd" id="1_q748n"]
 [ext_resource type="Texture2D" uid="uid://cp0kdvbr68qvv" path="res://Assets/Mana/Mana-sheetv2.png" id="2_d8wwj"]
+[ext_resource type="AudioStream" uid="uid://dtdbd5ub2bi3" path="res://SFX/manaUP.wav" id="3_iqeiu"]
 
 [sub_resource type="Animation" id="Animation_llnqh"]
 resource_name = "Glint"
@@ -65,6 +66,10 @@ initial_velocity_max = 30.0
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_67tvw")
 color = Color(0.247059, 0.47451, 0.52549, 1)
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_iqeiu")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

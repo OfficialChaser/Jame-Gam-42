@@ -23,8 +23,6 @@ var queued_end := false
 
 
 func _process(_delta):
-	print(seconds_survived)
-	print("Mana" + str(mana_gained))
 	if mana <= 5:
 		mana_pickup_amt = 20
 	elif mana <= 35:

@@ -14,7 +14,6 @@ func _on_restart_button_mouse_entered():
 
 
 func _on_restart_button_mouse_exited():
-	print("ee")
 	var tween = create_tween()
 	tween.tween_property(restart_button_label, "scale", Vector2(1, 1), 0.1)
 

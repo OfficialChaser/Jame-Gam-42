@@ -21,11 +21,14 @@ enum Type {PLAYER, ENEMY}
 @export var particle_color : Color
 var particle_rotation : float
 
+@export var hit_sfx : AudioStreamPlayer2D
+
 
 func hit(damage : int, particle_rot = -1000.0):
 	if can_take_damage:
 		match type:
 			Type.PLAYER:
+				hit_sfx.play()
 				if hit_flash_player:
 					get_tree().get_first_node_in_group("screen_tint").get_node("AnimationPlayer").play("Red Flash")
 					var camera = get_tree().get_first_node_in_group("main_camera")
@@ -33,6 +36,7 @@ func hit(damage : int, particle_rot = -1000.0):
 					GameManager.slow_time()
 					hit_flash_player.play("Hit Flash")
 			Type.ENEMY:
+				hit_sfx.play()
 				queue_damage_effect = true
 				if hit_flash_player:
 					GameManager.slow_time()

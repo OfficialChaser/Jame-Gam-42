@@ -7,13 +7,14 @@ class_name RestorationWand
 @export var grid_highlight : Sprite2D
 @onready var gui = get_tree().current_scene.get_node("CanvasLayer").get_node("GUI")
 
+@export var restoreSFX : AudioStreamPlayer2D
+
 var ammo := 3
 var reloading := false
 
 var rotating_back := false
 
 func Enter():
-	
 	grid_highlight.visible = true
 	GameManager.current_spell = "REPAIR"
 
@@ -58,6 +59,8 @@ func check_input():
 
 func restore_tiles():
 	if GameManager.mana > GameManager.restoring_cost and !reloading:
+		restoreSFX.global_position = wand.get_global_mouse_position()
+		restoreSFX.play()
 		var tiles = get_tree().current_scene.get_node("GameTiles")
 		var restored_tiles : bool = tiles.restore_tiles(
 			wand.get_global_mouse_position()

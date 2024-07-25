@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://chjepiwpg4oln"]
+[gd_scene load_steps=23 format=3 uid="uid://chjepiwpg4oln"]
 
 [ext_resource type="Shader" uid="uid://dnv5d7khiv3x5" path="res://hit_flash.tres" id="1_dqw6s"]
 [ext_resource type="Texture2D" uid="uid://8hntc8m53r0m" path="res://Assets/Zombie/zombie-sheetv2.png" id="1_gi0hk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="6_mjfb2"]
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="7_jshch"]
 [ext_resource type="AudioStream" uid="uid://cmynray7pagjj" path="res://SFX/JameGam42 SkeleSpawn.wav" id="10_e6ajp"]
+[ext_resource type="AudioStream" uid="uid://ds10uyo31hcd8" path="res://SFX/hit3.wav" id="11_jglno"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_icc7b"]
 resource_local_to_scene = true
@@ -231,7 +232,7 @@ animation_player = NodePath("../../AnimationPlayer")
 damage = 30
 attack_range = 25.0
 
-[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player")]
+[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player", "hit_sfx")]
 script = ExtResource("6_mjfb2")
 type = 1
 actor = NodePath("..")
@@ -240,6 +241,7 @@ health = 100
 destroy_handler = NodePath("../DestroyHandler")
 hit_flash_player = NodePath("../HitFlashAnimPlayer")
 particle_color = Color(0.247059, 0.47451, 0.52549, 1)
+hit_sfx = NodePath("../HitSFX")
 
 [node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player", "state_machine")]
 script = ExtResource("7_jshch")
@@ -262,4 +264,8 @@ libraries = {
 [node name="SpawnSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_e6ajp")
 volume_db = 15.0
+bus = &"SFX"
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_jglno")
 bus = &"SFX"

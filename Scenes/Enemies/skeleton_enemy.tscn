@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bteinqbxyigkb"]
+[gd_scene load_steps=23 format=3 uid="uid://bteinqbxyigkb"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/skeleton_enemy.gd" id="1_6debp"]
 [ext_resource type="Shader" uid="uid://dnv5d7khiv3x5" path="res://hit_flash.tres" id="2_6vf1u"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="7_4ga62"]
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="8_kvohp"]
 [ext_resource type="AudioStream" uid="uid://cmynray7pagjj" path="res://SFX/JameGam42 SkeleSpawn.wav" id="10_wytna"]
+[ext_resource type="AudioStream" uid="uid://bq0p048wxkyw3" path="res://SFX/hit2.wav" id="11_akp2t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbl3r"]
 resource_local_to_scene = true
@@ -246,7 +247,7 @@ animation_player = NodePath("../../AnimationPlayer")
 damage = 10
 attack_range = 25.0
 
-[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player")]
+[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player", "hit_sfx")]
 script = ExtResource("7_4ga62")
 type = 1
 actor = NodePath("..")
@@ -255,6 +256,7 @@ health = 60
 destroy_handler = NodePath("../DestroyHandler")
 hit_flash_player = NodePath("../HitFlashAnimPlayer")
 particle_color = Color(0.921569, 0.933333, 0.713726, 1)
+hit_sfx = NodePath("../HitSFX")
 
 [node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player", "state_machine")]
 script = ExtResource("8_kvohp")
@@ -277,6 +279,10 @@ libraries = {
 [node name="SpawnSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_wytna")
 volume_db = 15.0
+bus = &"SFX"
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_akp2t")
 bus = &"SFX"
 
 [connection signal="enable_damage" from="StateMachine/EnemySpawn" to="." method="_on_enemy_spawn_enable_damage"]
