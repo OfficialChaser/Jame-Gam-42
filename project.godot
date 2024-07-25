@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jame Gam 42"
-run/main_scene="res://Scenes/Main/main.tscn"
+run/main_scene="res://Scenes/main_menu_ui.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [autoload]

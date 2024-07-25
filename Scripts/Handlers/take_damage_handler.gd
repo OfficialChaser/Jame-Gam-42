@@ -27,6 +27,7 @@ func hit(damage : int, particle_rot = -1000.0):
 		match type:
 			Type.PLAYER:
 				if hit_flash_player:
+					get_tree().get_first_node_in_group("screen_tint").get_node("AnimationPlayer").play("Red Flash")
 					var camera = get_tree().get_first_node_in_group("main_camera")
 					camera.apply_shake(2, 7)
 					GameManager.slow_time()

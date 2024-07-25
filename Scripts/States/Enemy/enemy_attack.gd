@@ -23,7 +23,7 @@ func Enter():
 func _on_animation_finished(_anim_name):
 	# Checking if enemy is close enough to attack again
 	if player:
-		if (player.global_position - actor.global_position).length() < attack_range:
+		if (player.global_position - actor.global_position).length() < attack_range and get_parent().enabled:
 			player.get_node("TakeDamageHandler").hit(damage)
 			attack_sequence()
 	

@@ -246,7 +246,7 @@ script = ExtResource("8_kvohp")
 actor = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 state_machine = NodePath("../StateMachine")
-mana_amount = 10
+mana_amount = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

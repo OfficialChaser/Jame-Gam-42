@@ -7,7 +7,7 @@ class_name RestorationWand
 @export var grid_highlight : Sprite2D
 @onready var gui = get_tree().current_scene.get_node("CanvasLayer").get_node("GUI")
 
-var ammo := 1
+var ammo := 3
 var reloading := false
 
 var rotating_back := false
@@ -28,7 +28,6 @@ func Update(_delta):
 				wand.rotation = prev_rotation
 				wand.rotation = move_toward(wand.rotation, rot, 0.2)
 				if wand.rotation == rot:
-					print("test")
 					rotating_back = false
 			else:
 				wand.look_at(wand.get_global_mouse_position())
@@ -36,6 +35,8 @@ func Update(_delta):
 	else:
 		gui.reloading_text()
 	check_input()
+	if ammo == 0:
+		grid_highlight.visible = false
 
 func check_input():
 	# Switch wand state after right click
@@ -46,8 +47,9 @@ func check_input():
 		reloading = true
 		animation_player.play("reload_restoration")
 		
-	if Input.is_action_just_pressed("left_click"):
-		if ammo == 1:
+	if Input.is_action_just_pressed("left_click") and !grid_highlight.get_node("AnimationPlayer").is_playing():
+		if ammo >= 1:
+			grid_highlight.visible = true
 			restore_tiles()
 		else:
 			# Reloading
@@ -76,4 +78,4 @@ func end_reloading():
 	grid_highlight.visible = true
 	reloading = false
 	if (GameManager.mana > 0):
-		ammo = 1
+		ammo = 3

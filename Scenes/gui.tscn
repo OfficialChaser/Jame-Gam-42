@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqdgf4ri7ealj"]
+[gd_scene load_steps=17 format=3 uid="uid://dqdgf4ri7ealj"]
 
 [ext_resource type="Script" path="res://Scripts/gui.gd" id="1_71tic"]
 [ext_resource type="FontFile" uid="uid://eiw8wgpdg0j3" path="res://Assets/Fonts/8BITv6.ttf" id="2_kneqf"]
@@ -130,10 +130,10 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -142,10 +142,10 @@ tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.921569, 0.933333, 0.713726, 1), Color(0.921569, 0.223529, 0.305882, 1), Color(0.921569, 0.933333, 0.713726, 1)]
+"values": [Color(0.921569, 0.223529, 0.305882, 1), Color(0.921569, 0.933333, 0.713726, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_wkbm6"]
@@ -181,6 +181,86 @@ _data = {
 "RESET": SubResource("Animation_wkbm6")
 }
 
+[sub_resource type="Animation" id="Animation_sq6yu"]
+resource_name = "Subtle Shake"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a1d3d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.247059, 0.47451, 0.52549, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e34xp"]
+resource_name = "Out of Mana"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.215686, 0.203922, 1), Color(1, 0.215686, 0.203922, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lobmg"]
+_data = {
+"Out of Mana": SubResource("Animation_e34xp"),
+"RESET": SubResource("Animation_a1d3d"),
+"Subtle Shake": SubResource("Animation_sq6yu")
+}
+
 [node name="GUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -189,8 +269,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_71tic")
+normal_color = Color(0.247059, 0.47451, 0.52549, 1)
+warning_color = Color(1, 0.215686, 0.203922, 1)
 
 [node name="ManaBar" type="HSlider" parent="."]
+visible = false
 modulate = Color(0, 1, 1, 1)
 layout_mode = 1
 anchors_preset = 7
@@ -268,6 +351,33 @@ text = "Health: 100"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HealthLabel"]
 libraries = {
 "": SubResource("AnimationLibrary_3mw3j")
+}
+
+[node name="ManaLabel" type="Label" parent="."]
+modulate = Color(0.921569, 0.933333, 0.713726, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.5
+offset_top = -31.0
+offset_right = 122.5
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(122.5, 13)
+theme_override_colors/font_color = Color(0.247059, 0.47451, 0.52549, 1)
+theme_override_fonts/font = ExtResource("2_kneqf")
+theme_override_font_sizes/font_size = 25
+text = "Mana: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ManaLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_lobmg")
 }
 
 [connection signal="timeout" from="ManaDepletor" to="." method="_on_mana_depletor_timeout"]

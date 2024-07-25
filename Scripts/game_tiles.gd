@@ -1,12 +1,15 @@
 extends TileMap
 
 @onready var player = get_tree().get_first_node_in_group("Player")
+@onready var circle_highlight = get_tree().get_first_node_in_group("circle_highlight")
 
 func _on_tile_decay_timer_timeout():
 	if GameManager.game_over:
 		return
 		
 	var tile_position = find_random_tile()
+	circle_highlight.visible = true
+	circle_highlight.global_position = map_to_local(tile_position)
 	
 	# Playing animation
 	decay_tile(tile_position)

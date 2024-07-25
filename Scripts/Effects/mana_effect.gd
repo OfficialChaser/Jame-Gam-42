@@ -14,4 +14,7 @@ func _ready():
 	).set_trans(Tween.TRANS_LINEAR).set_ease(tween.EASE_OUT)
 
 func _process(_delta):
-	label.text = "+" + str(mana_amount)
+	if mana_amount > 0:
+		label.text = "+" + str(mana_amount)
+	else:
+		label.text = str(mana_amount)

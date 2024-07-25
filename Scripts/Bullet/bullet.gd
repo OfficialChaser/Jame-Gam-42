@@ -21,7 +21,6 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		parent_body = body
-		print("test")
 		body.get_node("TakeDamageHandler").hit(damage, rotation)
 		queue_free()
 	else:

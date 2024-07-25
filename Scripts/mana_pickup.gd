@@ -3,7 +3,7 @@ class_name ManaPickup
 
 var mana_effect = preload("res://Scenes/Mana/mana_effect.tscn")
 
-var mana_amount := 5
+var mana_amount := 10
 var queue_deletion = false
 
 var tile_position : Vector2i
