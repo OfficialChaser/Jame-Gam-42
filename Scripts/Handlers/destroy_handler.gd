@@ -15,7 +15,6 @@ func destroy_with_reward():
 	
 	# Disable character body
 	actor.get_node("CollisionShape2D").disabled = true
-	GameManager.enemies_killed
 	# Play animation if there is one
 	if animation_player:
 		# Animation needs to call queue free
@@ -50,3 +49,6 @@ func spawn_mana():
 	instance.global_position = actor.global_position
 	instance.mana_amount = mana_amount
 	get_tree().current_scene.add_child(instance)
+	
+func update_enemy_kill_count():
+	GameManager.enemies_killed += 1

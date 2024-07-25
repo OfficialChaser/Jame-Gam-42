@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0sv11oa06rv"]
+[gd_scene load_steps=14 format=3 uid="uid://0sv11oa06rv"]
 
 [ext_resource type="Script" path="res://Scripts/Main/main.gd" id="1_3j5qx"]
 [ext_resource type="PackedScene" uid="uid://ond57oqk3mow" path="res://Scenes/Main/main_camera.tscn" id="1_caga4"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bow61vbksbqlh" path="res://Scenes/Main/game_tiles.tscn" id="3_r8el6"]
 [ext_resource type="AudioStream" uid="uid://xgwhbkiim4u1" path="res://Music/JameGam42 Main Theme.wav" id="4_fdohr"]
 [ext_resource type="PackedScene" uid="uid://6ueijcoufwq5" path="res://Scenes/circle_highlight.tscn" id="8_64rir"]
+[ext_resource type="Script" path="res://Scripts/seconds_timer.gd" id="10_u35wu"]
 
 [sub_resource type="Animation" id="Animation_ki73a"]
 length = 0.001
@@ -89,6 +90,11 @@ libraries = {
 [node name="CircleHighlight" parent="." groups=["circle_highlight"] instance=ExtResource("8_64rir")]
 visible = false
 
-[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[node name="SecondsTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("10_u35wu")
+
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="ManaSpawnTimer" to="." method="_on_mana_spawn_timer_timeout"]
+[connection signal="timeout" from="SecondsTimer" to="SecondsTimer" method="_on_timeout"]

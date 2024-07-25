@@ -113,6 +113,7 @@ autostart = true
 
 [node name="TileDecaySFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_en6h7")
+volume_db = -2.0
 bus = &"SFX"
 
 [connection signal="timeout" from="TileDecayTimer" to="." method="_on_tile_decay_timer_timeout"]
