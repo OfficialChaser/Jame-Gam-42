@@ -21,6 +21,8 @@ func _process(_delta):
 	update_spell()
 	mana_bar.value = GameManager.mana
 	update_health()
+	if GameManager.game_over:
+		ammo_anim_player.stop()
 
 func _on_mana_depletor_timeout():
 	if GameManager.game_over:
@@ -31,10 +33,19 @@ func update_ammo(ammo : int):
 	if ui_ammo != ammo:
 		ammo_anim_player.play("Pop")
 	ui_ammo = ammo
+	var left_in_mag : int
 	if GameManager.current_spell == "FIREBALL":
-		ammo_label.text = "AMMO: " + str(ammo) + "/" + str(GameManager.mana/2-ammo)# maxAmmo
-	else:	#reload needs to be reworked where you only gain as many bullets as you have mana (not always full mag)
-		ammo_label.text = "AMMO: " + str(ammo) + "/" + str(GameManager.mana/5-ammo)# maxAmmo
+		left_in_mag = GameManager.mana/2-ammo
+		if left_in_mag < 0:
+			ammo += left_in_mag
+			left_in_mag = 0
+		ammo_label.text = "AMMO: " + str(ammo) + "/" + str(left_in_mag)
+	else:
+		left_in_mag = GameManager.mana/5-ammo
+		if left_in_mag < 0:
+			ammo += left_in_mag
+			left_in_mag = 0
+		ammo_label.text = "AMMO: " + str(ammo) + "/" + str(left_in_mag)
 	if ammo == 0:
 		player.change_warning_label(true)
 	else:

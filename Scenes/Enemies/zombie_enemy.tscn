@@ -1,0 +1,244 @@
+[gd_scene load_steps=21 format=3 uid="uid://chjepiwpg4oln"]
+
+[ext_resource type="Shader" uid="uid://dnv5d7khiv3x5" path="res://hit_flash.tres" id="1_dqw6s"]
+[ext_resource type="Texture2D" uid="uid://8hntc8m53r0m" path="res://Assets/Zombie/zombie-sheetv2.png" id="1_gi0hk"]
+[ext_resource type="Script" path="res://Scripts/Enemies/zombie_enemy.gd" id="1_vuke3"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="2_t331l"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_spawn.gd" id="3_g0nt6"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_pursue.gd" id="4_30sct"]
+[ext_resource type="Script" path="res://Scripts/States/Enemy/enemy_attack.gd" id="5_qyq0m"]
+[ext_resource type="Script" path="res://Scripts/Handlers/take_damage_handler.gd" id="6_mjfb2"]
+[ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="7_jshch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icc7b"]
+resource_local_to_scene = true
+shader = ExtResource("1_dqw6s")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4643"]
+size = Vector2(11, 12)
+
+[sub_resource type="Animation" id="Animation_fgw7q"]
+resource_name = "Spawn"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2, 0.4, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ib3im"]
+resource_name = "Attack"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 0]
+}
+
+[sub_resource type="Animation" id="Animation_rewum"]
+resource_name = "Pursue"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [23, 24, 25, 26]
+}
+
+[sub_resource type="Animation" id="Animation_2o6d2"]
+resource_name = "Death"
+length = 1.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DestroyHandler")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_mana"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g4tem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_njqjp"]
+_data = {
+"Attack": SubResource("Animation_ib3im"),
+"Death": SubResource("Animation_2o6d2"),
+"Pursue": SubResource("Animation_rewum"),
+"RESET": SubResource("Animation_g4tem"),
+"Spawn": SubResource("Animation_fgw7q")
+}
+
+[sub_resource type="Animation" id="Animation_gmgol"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_milag"]
+resource_name = "Hit Flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8klfp"]
+_data = {
+"Hit Flash": SubResource("Animation_milag"),
+"RESET": SubResource("Animation_gmgol")
+}
+
+[node name="ZombieEnemy" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_vuke3")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_icc7b")
+texture = ExtResource("1_gi0hk")
+hframes = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_j4643")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_t331l")
+initial_state = NodePath("EnemySpawn")
+
+[node name="EnemySpawn" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("3_g0nt6")
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("4_30sct")
+min_speed = 0.6
+max_speed = 0.8
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="EnemyAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
+script = ExtResource("5_qyq0m")
+actor = NodePath("../..")
+enemy_sprite = NodePath("../../EnemySprite")
+animation_player = NodePath("../../AnimationPlayer")
+damage = 30
+attack_range = 25.0
+
+[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player")]
+script = ExtResource("6_mjfb2")
+type = 1
+actor = NodePath("..")
+can_take_damage = true
+health = 120
+destroy_handler = NodePath("../DestroyHandler")
+hit_flash_player = NodePath("../HitFlashAnimPlayer")
+particle_color = Color(0.247059, 0.47451, 0.52549, 1)
+
+[node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player", "state_machine")]
+script = ExtResource("7_jshch")
+actor = NodePath("..")
+animation_player = NodePath("../AnimationPlayer")
+state_machine = NodePath("../StateMachine")
+mana_amount = 15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_njqjp")
+}
+autoplay = "Spawn"
+
+[node name="HitFlashAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8klfp")
+}

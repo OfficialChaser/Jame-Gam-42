@@ -26,6 +26,8 @@ func _physics_process(_delta):
 func _process(_delta):
 	if can_move:
 		_handle_animations()
+	else:
+		$WarningLabel.visible = false
 
 func _handle_animations():
 	if direction != Vector2.ZERO and !stationary:

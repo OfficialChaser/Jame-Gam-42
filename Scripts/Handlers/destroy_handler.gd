@@ -20,6 +20,7 @@ func destroy_with_reward():
 	if animation_player:
 		# Animation needs to call queue free
 		animation_player.play("Death")
+		actor.z_index = 0
 	else:
 		spawn_mana()
 		queue_free()
@@ -27,12 +28,20 @@ func destroy_with_reward():
 func destroy_player(way : String):
 	actor.get_node("CollisionShape2D").disabled = true
 	actor.can_move = false
-	actor.global_position = GameManager.place_of_death
+	GameManager.game_over = true
+	var camera = get_tree().get_first_node_in_group("main_camera")
+	camera.zoom_in_on_player()
 	
 	if way.to_lower() == "falling":
+		actor.global_position = GameManager.place_of_death
 		if animation_player:
 			# Animation needs to call queue free
 			animation_player.play("Fall")
+			# queue game over in animation
+	elif way.to_lower() == "killed":
+		if animation_player:
+			# Animation needs to call queue free
+			animation_player.play("Die")
 			# queue game over in animation
 
 func spawn_mana():

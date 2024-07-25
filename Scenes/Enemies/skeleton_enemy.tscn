@@ -201,6 +201,7 @@ hframes = 30
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_anvki")
 
@@ -216,6 +217,8 @@ animation_player = NodePath("../../AnimationPlayer")
 
 [node name="EnemyPursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "enemy_sprite", "animation_player")]
 script = ExtResource("5_kiwuy")
+min_speed = 0.8
+max_speed = 1.2
 actor = NodePath("../..")
 enemy_sprite = NodePath("../../EnemySprite")
 animation_player = NodePath("../../AnimationPlayer")
@@ -228,12 +231,15 @@ animation_player = NodePath("../../AnimationPlayer")
 damage = 10
 attack_range = 25.0
 
-[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("destroy_handler", "hit_flash_player")]
+[node name="TakeDamageHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_handler", "hit_flash_player")]
 script = ExtResource("7_4ga62")
 type = 1
+actor = NodePath("..")
+can_take_damage = true
 health = 60
 destroy_handler = NodePath("../DestroyHandler")
 hit_flash_player = NodePath("../HitFlashAnimPlayer")
+particle_color = Color(0.921569, 0.933333, 0.713726, 1)
 
 [node name="DestroyHandler" type="Node" parent="." node_paths=PackedStringArray("actor", "animation_player", "state_machine")]
 script = ExtResource("8_kvohp")

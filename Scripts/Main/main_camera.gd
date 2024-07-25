@@ -30,3 +30,18 @@ func apply_shake(strength: float, fade : float):
 
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
+
+func zoom_in_on_player():
+	#Disable GUI
+	get_tree().current_scene.get_node("CanvasLayer").get_node("GUI").visible = false
+	
+	var player := get_tree().get_first_node_in_group("Player")
+	var tween = create_tween()
+	tween.parallel().tween_property(
+		self, "global_position", 
+		player.global_position, 0.1
+	)
+	tween.parallel().tween_property(
+		self, "zoom", 
+		Vector2(9, 9), 0.6
+	)

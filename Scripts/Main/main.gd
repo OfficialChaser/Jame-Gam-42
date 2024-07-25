@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var game_tiles = %GameTiles
 
+@export var enemies : Array[PackedScene]
+
 var skeleton_enemy := preload("res://Scenes/Enemies/skeleton_enemy.tscn")
 var mana_pickup := preload("res://Scenes/Mana/mana_pickup.tscn")
 var num = 1
@@ -25,7 +27,8 @@ func spawn_object(object : PackedScene) -> Node2D:
 	return instance
 
 func spawn_enemy():
-	var instance = spawn_object(skeleton_enemy)
+	var enemy = enemies[randi_range(0, 1)]
+	var instance = spawn_object(enemy)
 	instance.name = "Enemy" + str(num)
 	num += 1
 	add_child(instance)

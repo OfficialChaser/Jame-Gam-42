@@ -2,6 +2,8 @@ extends Area2D
 
 var parent_body : CharacterBody2D
 
+var wall_particles := preload("res://Scenes/Effects/wall_particles.tscn")
+
 var damage_effect
 @export var speed : float
 @export var damage : int
@@ -19,17 +21,25 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		parent_body = body
-		body.get_node("TakeDamageHandler").hit(damage)
+		print("test")
+		body.get_node("TakeDamageHandler").hit(damage, rotation)
 		queue_free()
-		#spawn_damage_effect(parent_body)
 	else:
+		spawn_wall_particles()
 		queue_free()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
-func spawn_damage_effect(body : CharacterBody2D):
-	var instance = damage_effect.instantiate()
-	instance.get_node("Label").text = str(damage)
-	body.add_child(instance)
+func spawn_wall_particles():
+	var instance = wall_particles.instantiate()
+	
+	instance.global_position = global_position
+	instance.rotation = rotation + PI
+	
+	instance.set_as_top_level(true)
+	
+	instance.emitting = true
+	
+	get_parent().add_child(instance)
