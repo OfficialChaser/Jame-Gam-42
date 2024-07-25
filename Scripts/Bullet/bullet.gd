@@ -3,6 +3,7 @@ extends Area2D
 var parent_body : CharacterBody2D
 
 var wall_particles := preload("res://Scenes/Effects/wall_particles.tscn")
+var sfx := preload("res://Scenes/bullet_sfx.tscn")
 
 var damage_effect
 @export var speed : float
@@ -40,5 +41,10 @@ func spawn_wall_particles():
 	instance.set_as_top_level(true)
 	
 	instance.emitting = true
-	
 	get_parent().add_child(instance)
+	
+	var instance2 = sfx.instantiate()
+	instance2.global_position = global_position
+	get_tree().current_scene.add_child(instance2)
+	instance2.play()
+	

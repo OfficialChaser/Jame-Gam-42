@@ -48,3 +48,6 @@ func display_stats():
 	
 	final_score.text = "SCORE: " + str(GameManager.score)
 	
+
+func change_music():
+	MusicPlayer.change_music(menu_music)

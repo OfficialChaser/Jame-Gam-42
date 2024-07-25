@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/player_collision_handler.gd" id="5_fkuyb"]
 [ext_resource type="Script" path="res://Scripts/Handlers/destroy_handler.gd" id="5_xh3ly"]
 [ext_resource type="Texture2D" uid="uid://bkl0p4jocb8d4" path="res://Assets/Misc/outofammo.png" id="7_2pmcm"]
-[ext_resource type="AudioStream" uid="uid://bv2ure1fjk1bv" path="res://SFX/death.wav" id="9_a7hqd"]
+[ext_resource type="AudioStream" uid="uid://bxk3ri6veu8dl" path="res://SFX/JameGam42 Game Over.wav" id="9_bvcvx"]
 [ext_resource type="AudioStream" uid="uid://d1j1wnwjlmry3" path="res://SFX/hurt2.wav" id="10_60jni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_10jkj"]
@@ -367,7 +367,8 @@ libraries = {
 }
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_a7hqd")
+stream = ExtResource("9_bvcvx")
+volume_db = 8.0
 bus = &"SFX"
 
 [node name="HitSFX" type="AudioStreamPlayer2D" parent="."]

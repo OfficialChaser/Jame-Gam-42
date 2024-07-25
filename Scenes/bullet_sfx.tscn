@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bugyrqjxjqjdr"]
+
+[ext_resource type="AudioStream" uid="uid://dpe0lwc6e5qjx" path="res://SFX/JameGam42 Bullet Hits Wall.wav" id="1_1he6t"]
+
+[node name="BulletSFX" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_1he6t")
+volume_db = 2.0

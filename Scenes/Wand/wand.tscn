@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bl13nn3svg4fh" path="res://Assets/Wand/wand-new3.png" id="8_1ln2s"]
 [ext_resource type="AudioStream" uid="uid://cefl38w1wc0rx" path="res://SFX/JameGam42 Wand Shoot (2).wav" id="9_m2c46"]
 [ext_resource type="AudioStream" uid="uid://ckur1yigpxo02" path="res://SFX/repair.wav" id="10_52as6"]
+[ext_resource type="AudioStream" uid="uid://d2ghbk6rbc0vq" path="res://SFX/JameGam42 Reload.wav" id="11_u2gmu"]
 
 [sub_resource type="Animation" id="Animation_km4jw"]
 length = 0.001
@@ -102,6 +103,20 @@ tracks/3/keys = {
 "method": &"end_reloading"
 }]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StateMachine/FireballWand")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_reload_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_odk8w"]
 resource_name = "reload_restoration"
@@ -153,6 +168,20 @@ tracks/3/keys = {
 "values": [{
 "args": [],
 "method": &"end_reloading"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StateMachine/RestorationWand")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_reload_sfx"
 }]
 }
 
@@ -274,7 +303,7 @@ libraries = {
 script = ExtResource("4_pa5e7")
 initial_state = NodePath("FireballWand")
 
-[node name="FireballWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "bullet_marker", "grid_highlight", "sfx")]
+[node name="FireballWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "bullet_marker", "grid_highlight", "sfx", "reload_sfx")]
 process_priority = 1
 script = ExtResource("6_p6ksq")
 wand = NodePath("../..")
@@ -282,13 +311,15 @@ animation_player = NodePath("../../AnimationPlayer")
 bullet_marker = NodePath("../../BulletMarker")
 grid_highlight = NodePath("../../GridHighlight")
 sfx = NodePath("../../ShootSFX")
+reload_sfx = NodePath("../../ReloadSFX")
 
-[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight", "restoreSFX")]
+[node name="RestorationWand" type="Node" parent="StateMachine" node_paths=PackedStringArray("wand", "animation_player", "grid_highlight", "restoreSFX", "reload_sfx")]
 script = ExtResource("7_whgei")
 wand = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 grid_highlight = NodePath("../../GridHighlight")
 restoreSFX = NodePath("../../RestoreSFX")
+reload_sfx = NodePath("../../ReloadSFX")
 
 [node name="WandSprites" type="Node" parent="."]
 
@@ -306,3 +337,8 @@ volume_db = 5.0
 
 [node name="RestoreSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_52as6")
+
+[node name="ReloadSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_u2gmu")
+volume_db = -3.0
+bus = &"SFX"
