@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://dq6eftrbnag1o"]
+[gd_scene load_steps=20 format=3 uid="uid://dq6eftrbnag1o"]
 
 [ext_resource type="Script" path="res://Scripts/Wand/wand.gd" id="1_dft4f"]
-[ext_resource type="Texture2D" uid="uid://bnl8e2kh4sf3" path="res://Assets/Wand/wand-new2.png" id="2_pmxw6"]
+[ext_resource type="Texture2D" uid="uid://biw3m2acdx16g" path="res://Assets/Wand/wand.png" id="2_hk7c0"]
 [ext_resource type="PackedScene" uid="uid://cmk7nu4tph1id" path="res://Scenes/grid_highlight.tscn" id="3_35krf"]
 [ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="4_pa5e7"]
 [ext_resource type="Texture2D" uid="uid://c1yxwkykcuomc" path="res://Assets/Grid/selectorv3.png" id="4_q2ln0"]
 [ext_resource type="Script" path="res://Scripts/Wand/fireball_wand.gd" id="6_p6ksq"]
 [ext_resource type="Script" path="res://Scripts/Wand/restoration_wand.gd" id="7_whgei"]
-[ext_resource type="Texture2D" uid="uid://bl13nn3svg4fh" path="res://Assets/Wand/wand-new3.png" id="8_1ln2s"]
+[ext_resource type="Texture2D" uid="uid://bbqls7ptwvdpb" path="res://wand-new2.png" id="8_2fnr3"]
 [ext_resource type="AudioStream" uid="uid://cefl38w1wc0rx" path="res://SFX/JameGam42 Wand Shoot (2).wav" id="9_m2c46"]
+[ext_resource type="Texture2D" uid="uid://c4uy76nnxu1bp" path="res://wand-new3.png" id="9_smol6"]
 [ext_resource type="AudioStream" uid="uid://ckur1yigpxo02" path="res://SFX/repair.wav" id="10_52as6"]
 [ext_resource type="AudioStream" uid="uid://d2ghbk6rbc0vq" path="res://SFX/JameGam42 Reload.wav" id="11_u2gmu"]
 
@@ -278,7 +279,7 @@ position = Vector2(20, 0)
 
 [node name="WandSprite" type="Sprite2D" parent="SpriteHolder"]
 position = Vector2(-10, 0)
-texture = ExtResource("2_pmxw6")
+texture = ExtResource("2_hk7c0")
 
 [node name="BulletMarker" type="Marker2D" parent="."]
 position = Vector2(7, 0)
@@ -325,11 +326,11 @@ reload_sfx = NodePath("../../ReloadSFX")
 
 [node name="FBSprite" type="Sprite2D" parent="WandSprites"]
 visible = false
-texture = ExtResource("2_pmxw6")
+texture = ExtResource("8_2fnr3")
 
 [node name="RESSprite" type="Sprite2D" parent="WandSprites"]
 visible = false
-texture = ExtResource("8_1ln2s")
+texture = ExtResource("9_smol6")
 
 [node name="ShootSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_m2c46")
