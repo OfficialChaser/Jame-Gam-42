@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dpe0lwc6e5qjx"
+path="res://.godot/imported/JameGam42 Bullet Hits Wall.wav-137e7bd40a75deb9ed0f5aac532d251f.sample"
+
+[deps]
+
+source_file="res://SFX/JameGam42 Bullet Hits Wall.wav"
+dest_files=["res://.godot/imported/JameGam42 Bullet Hits Wall.wav-137e7bd40a75deb9ed0f5aac532d251f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

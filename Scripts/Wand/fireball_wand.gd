@@ -19,6 +19,8 @@ var reloading := false
 
 var rotating_back := false
 
+@export var reload_sfx : AudioStreamPlayer
+
 func Enter():
 	grid_highlight.visible = false
 	GameManager.current_spell = "FIREBALL"
@@ -102,3 +104,6 @@ func end_reloading():
 			ammo = 15
 		else:
 			ammo = GameManager.mana/2
+
+func play_reload_sfx():
+	reload_sfx.play()

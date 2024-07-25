@@ -14,6 +14,8 @@ var reloading := false
 
 var rotating_back := false
 
+@export var reload_sfx : AudioStreamPlayer
+
 func Enter():
 	grid_highlight.visible = true
 	GameManager.current_spell = "REPAIR"
@@ -82,3 +84,6 @@ func end_reloading():
 	reloading = false
 	if (GameManager.mana > 0):
 		ammo = 3
+
+func play_reload_sfx():
+	reload_sfx.play()

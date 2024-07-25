@@ -36,6 +36,7 @@ func destroy_player(way : String):
 	actor.get_node("CollisionShape2D").disabled = true
 	actor.can_move = false
 	GameManager.game_over = true
+	MusicPlayer.change_music(null)
 	var camera = get_tree().get_first_node_in_group("main_camera")
 	camera.zoom_in_on_player()
 	
