@@ -10,10 +10,19 @@ var skeleton_enemy := preload("res://Scenes/Enemies/skeleton_enemy.tscn")
 var mana_pickup := preload("res://Scenes/Mana/mana_pickup.tscn")
 var num = 1
 
+var shown_game_over := false
+
 func _ready():
 	MusicPlayer.change_music(main_music)
 	spawn_mana()
 	spawn_enemy()
+
+func _process(_delta):
+	if GameManager.queued_end and !shown_game_over:
+		shown_game_over = true
+		await get_tree().create_timer(2).timeout
+		$CanvasLayer/GameOverUI.visible = true
+		
 
 func _on_enemy_spawn_timer_timeout():
 	if !GameManager.game_over:

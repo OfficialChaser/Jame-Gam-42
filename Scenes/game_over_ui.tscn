@@ -1,0 +1,428 @@
+[gd_scene load_steps=13 format=3 uid="uid://d2ycwvwvyr0nq"]
+
+[ext_resource type="FontFile" uid="uid://eiw8wgpdg0j3" path="res://Assets/Fonts/8BITv6.ttf" id="1_ep0v5"]
+[ext_resource type="Script" path="res://Scripts/game_over_ui.gd" id="1_ls7m6"]
+[ext_resource type="AudioStream" uid="uid://cmukxj873tghr" path="res://Music/JameGam42 Menu Music.wav" id="2_2ay7v"]
+[ext_resource type="Texture2D" uid="uid://b4cj2ebaej6yl" path="res://Assets/game-over_banner.png" id="2_f7w0k"]
+
+[sub_resource type="Animation" id="Animation_5xmk0"]
+resource_name = "End Sequence"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FinalScore:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1.1, 1.1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FinalScore:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(368, 616), Vector2(368, 616), Vector2(368, 280), Vector2(368, 322)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RestartButton/RestartLabel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-126, 200), Vector2(-126, 200), Vector2(-126, 0), Vector2(-126, 15)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RestartButton:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatContainer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RestartButton:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FinalScore:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rx4qi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FinalScore:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FinalScore:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(368, 322)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RestartButton/RestartLabel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-126, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RestartButton:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StatContainer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RestartButton:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FinalScore:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hoc3l"]
+_data = {
+"End Sequence": SubResource("Animation_5xmk0"),
+"RESET": SubResource("Animation_rx4qi")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7d1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lxc8n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kud70"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_08arm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dgj3q"]
+
+[node name="GameOverUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ls7m6")
+menu_music = ExtResource("2_2ay7v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -474.0
+offset_top = -304.0
+offset_right = -348.0
+offset_bottom = -232.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+texture = ExtResource("2_f7w0k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hoc3l")
+}
+
+[node name="StatContainer" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 349.0
+offset_top = 195.0
+offset_right = 389.0
+offset_bottom = 235.0
+
+[node name="SecondsSurvived" type="Label" parent="StatContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 435.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.439216, 0.219608, 0.262745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 9
+theme_override_fonts/font = ExtResource("1_ep0v5")
+theme_override_font_sizes/font_size = 15
+text = "SECONDS SURIVIVED: 0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaCollected" type="Label" parent="StatContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_right = 410.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.439216, 0.219608, 0.262745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 9
+theme_override_fonts/font = ExtResource("1_ep0v5")
+theme_override_font_sizes/font_size = 15
+text = "MANA COLLECTED: 0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemiesKilled" type="Label" parent="StatContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = 410.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.439216, 0.219608, 0.262745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 9
+theme_override_fonts/font = ExtResource("1_ep0v5")
+theme_override_font_sizes/font_size = 15
+text = "ENEMIES KILLED: 0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScore" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -326.0
+offset_right = 202.0
+offset_bottom = -199.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(201, 70)
+theme_override_colors/font_color = Color(0.933333, 0.941176, 0.752941, 1)
+theme_override_colors/font_outline_color = Color(0.0862745, 0.0823529, 0.0862745, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/line_spacing = 9
+theme_override_fonts/font = ExtResource("1_ep0v5")
+theme_override_font_sizes/font_size = 50
+text = "SCORE: 0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = 137.0
+offset_right = 123.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(117, 27)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o7d1k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lxc8n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kud70")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_08arm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dgj3q")
+
+[node name="RestartLabel" type="Label" parent="RestartButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -12.5
+offset_right = 245.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(245, 14)
+theme_override_colors/font_color = Color(0.933333, 0.941176, 0.752941, 1)
+theme_override_colors/font_outline_color = Color(0.0862745, 0.0823529, 0.0862745, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_ep0v5")
+theme_override_font_sizes/font_size = 25
+text = "- RESTART -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="RestartButton" to="." method="_on_restart_button_down"]
+[connection signal="button_up" from="RestartButton" to="." method="_on_restart_button_up"]
+[connection signal="mouse_entered" from="RestartButton" to="." method="_on_restart_button_mouse_entered"]
+[connection signal="mouse_exited" from="RestartButton" to="." method="_on_restart_button_mouse_exited"]

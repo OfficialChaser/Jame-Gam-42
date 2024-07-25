@@ -3,4 +3,5 @@ extends Timer
 
 
 func _on_timeout():
-	GameManager.seconds_survived += 1
+	if !GameManager.game_over:
+		GameManager.seconds_survived += 1

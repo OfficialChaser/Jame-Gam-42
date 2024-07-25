@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://0grtk6xhl1vl" path="res://Assets/CircleHighlight.png" id="1_4gjrc"]
 
 [node name="CircleHighlight" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.133333)
+modulate = Color(0, 0, 0, 0.282353)
 z_index = 6
+scale = Vector2(1.03285, 0.936709)
 texture = ExtResource("1_4gjrc")

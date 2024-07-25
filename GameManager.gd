@@ -21,7 +21,10 @@ var game_over := false
 
 var queued_end := false
 
+
 func _process(_delta):
+	print(seconds_survived)
+	print("Mana" + str(mana_gained))
 	if mana <= 5:
 		mana_pickup_amt = 20
 	elif mana <= 35:
@@ -30,9 +33,7 @@ func _process(_delta):
 		mana_pickup_amt = 5
 		
 	if game_over and !queued_end:
-		print(mana_gained)
-		print(enemies_killed)
-		print(seconds_survived)
+		score = seconds_survived + mana_gained + 20 * enemies_killed
 		queued_end = true
 
 func increase_mana(amt : int):
@@ -45,9 +46,12 @@ func reset_stats():
 	score = 0
 	enemies_killed = 0
 	mana = 100
+	mana_gained = 0
+	seconds_survived = 0
 	shooting_cost = 2
 	restoring_cost = 5
 	place_of_death = Vector2.ZERO
+	queued_end = false
 	game_over = false
 
 func slow_time():

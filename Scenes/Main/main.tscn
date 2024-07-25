@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0sv11oa06rv"]
+[gd_scene load_steps=15 format=3 uid="uid://0sv11oa06rv"]
 
 [ext_resource type="Script" path="res://Scripts/Main/main.gd" id="1_3j5qx"]
 [ext_resource type="PackedScene" uid="uid://ond57oqk3mow" path="res://Scenes/Main/main_camera.tscn" id="1_caga4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://chjepiwpg4oln" path="res://Scenes/Enemies/zombie_enemy.tscn" id="3_5h82y"]
 [ext_resource type="PackedScene" uid="uid://bow61vbksbqlh" path="res://Scenes/Main/game_tiles.tscn" id="3_r8el6"]
 [ext_resource type="AudioStream" uid="uid://xgwhbkiim4u1" path="res://Music/JameGam42 Main Theme.wav" id="4_fdohr"]
+[ext_resource type="PackedScene" uid="uid://d2ycwvwvyr0nq" path="res://Scenes/game_over_ui.tscn" id="6_wkow4"]
 [ext_resource type="PackedScene" uid="uid://6ueijcoufwq5" path="res://Scenes/circle_highlight.tscn" id="8_64rir"]
 [ext_resource type="Script" path="res://Scripts/seconds_timer.gd" id="10_u35wu"]
 
@@ -56,6 +57,9 @@ main_music = ExtResource("4_fdohr")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource("2_6tcjp")]
+
+[node name="GameOverUI" parent="CanvasLayer" groups=["game_over"] instance=ExtResource("6_wkow4")]
+visible = false
 
 [node name="GameTiles" parent="." instance=ExtResource("3_r8el6")]
 unique_name_in_owner = true
