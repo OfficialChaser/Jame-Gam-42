@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cefl38w1wc0rx"
+path="res://.godot/imported/JameGam42 Wand Shoot (2).wav-16692d13a7fc0018e7c864f554068c73.sample"
+
+[deps]
+
+source_file="res://SFX/JameGam42 Wand Shoot (2).wav"
+dest_files=["res://.godot/imported/JameGam42 Wand Shoot (2).wav-16692d13a7fc0018e7c864f554068c73.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
