@@ -30,8 +30,8 @@ func find_random_tile() -> Vector2i:
 		# Picking a random tile to remove
 		tile_position = local_to_map(
 			Vector2(
-				randf_range(-175, -175),
-				randf_range(85, 85)
+				randf_range(-175, 175),
+				randf_range(-75, 75)
 			)
 		)
 		var tile_data = get_cell_tile_data(0, tile_position)
