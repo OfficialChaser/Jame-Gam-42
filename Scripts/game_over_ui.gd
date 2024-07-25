@@ -7,6 +7,7 @@ extends Control
 @onready var final_score = $FinalScore
 
 @export var menu_music : AudioStream
+@onready var roll_animation_player = $Sprite2D/RollAnimationPlayer
 
 func _on_restart_button_mouse_entered():
 	var tween = create_tween()
@@ -34,6 +35,7 @@ func _on_restart_button_up():
 
 func _on_visibility_changed():
 	if visible:
+		roll_animation_player.play("show")
 		MusicPlayer.change_music(menu_music)
 		$AnimationPlayer.play("End Sequence")
 		display_stats()
